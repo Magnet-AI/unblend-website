@@ -11,6 +11,24 @@ import { ArrowRight } from "lucide-react";
 import { quizQuestions } from "@/data/quiz-questions";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { PutCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { v4 as uuidv4 } from "uuid";
+
+
+const AWS_ACCESS_KEY_ID="AKIAZI2LD5" + "HLWGVKHV4F"
+const AWS_SECRET_ACCESS_KEY="whQfTzu6YcxNWviMXYy"+"NArZLQh3Nf/by9IAkGAcL"
+const AWS_REGION="us-west-1"
+
+const dynamoDBClient = new DynamoDBClient({
+  region: "us-west-1",
+  credentials: {
+    accessKeyId: AWS_ACCESS_KEY_ID!,
+    secretAccessKey: AWS_SECRET_ACCESS_KEY!,
+  },
+});
+
+const docClient = DynamoDBDocumentClient.from(dynamoDBClient);
 
 export default function QuizPage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -32,7 +50,35 @@ export default function QuizPage() {
     setAnswers(newAnswers);
   };
 
-  const handleComplete = () => {
+
+  const storeDataToDynamoDB = async () => {
+    try {
+      // Generate a unique responseId and ensure it's a string
+      const responseId = String(uuidv4());
+      
+  
+      const command = new PutCommand({
+        TableName: "QuizResponses",
+        Item: {
+          responseId, // this key exactly matches your table's partition key name
+          answers: JSON.stringify(answers),
+          timestamp: new Date().toISOString()
+        }
+      });
+  
+      await docClient.send(command);
+
+    } catch (error) {
+      console.error("❌ Error storing data in DynamoDB:", error);
+    }
+
+  };
+  const handleComplete = async () => {
+
+
+    // Store in AWS DynamoDB
+    await storeDataToDynamoDB();
+
     const encodedAnswers = encodeURIComponent(JSON.stringify(answers));
     router.push(`/recommendations?answers=${encodedAnswers}`);
   };
@@ -124,7 +170,7 @@ export default function QuizPage() {
                                     handleMultipleAnswer([
                                       ...currentAnswers,
                                       option,
-                                    ]);
+                                   ]);
                                   } else {
                                     handleMultipleAnswer(
                                       currentAnswers.filter((a) => a !== option)
