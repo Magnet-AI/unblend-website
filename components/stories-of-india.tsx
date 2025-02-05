@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const stories = [
   {
@@ -27,6 +28,8 @@ const stories = [
 ];
 
 export function StoriesOfIndia() {
+  const [expanded, setExpanded] = useState(null);
+
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
@@ -44,16 +47,16 @@ export function StoriesOfIndia() {
             common health and nutrition challenges
           </p>
         </motion.div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
           {stories.map((story, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
+              className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden flex flex-col h-full"
             >
-              <div className="relative h-64">
+              <div className="relative h-64 w-full">
                 <Image
                   src={story.image || "/placeholder.svg"}
                   alt={story.title}
@@ -61,18 +64,23 @@ export function StoriesOfIndia() {
                   className="object-cover"
                 />
               </div>
-              <div className="p-6">
+              <div className="p-6 flex-grow flex flex-col">
                 <h3 className="text-2xl font-bold text-unblend-navy mb-2">
                   {story.title}
                 </h3>
                 <p className="text-sm text-gray-600 mb-4">
                   {story.description}
                 </p>
-                <p className="text-gray-700 leading-relaxed line-clamp-4">
-                  {story.content}
+                <p className="text-gray-700 leading-relaxed flex-grow">
+                  {expanded === index
+                    ? story.content
+                    : story.content.slice(0, 120) + "..."}
                 </p>
-                <button className="mt-4 text-unblend-blue hover:text-unblend-navy transition-colors">
-                  Read more
+                <button
+                  className="mt-4 text-unblend-blue hover:text-unblend-navy transition-colors self-start"
+                  onClick={() => setExpanded(expanded === index ? null : index)}
+                >
+                  {expanded === index ? "Read less" : "Read more"}
                 </button>
               </div>
             </motion.div>

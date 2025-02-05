@@ -42,8 +42,7 @@ export function Footer() {
               UnBlend
             </h3>
             <p className="text-unblend-navy/80">
-              Revolutionizing milk for a better lifestyle through innovation and
-              nutrition.
+              Revolutionizing milk for a better lifestyle through innovation.
             </p>
           </motion.div>
           <motion.div variants={itemVariants}>
