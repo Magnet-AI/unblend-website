@@ -28,11 +28,6 @@ const faqs = [
       "Yes, UnBlend milk is suitable for children and can be a great way to increase their protein and calcium intake. However, as with any dietary changes, we recommend consulting with a pediatrician, especially for very young children.",
   },
   {
-    question: "Where can I buy UnBlend products?",
-    answer:
-      "UnBlend products are available at major grocery stores and supermarkets across the country. You can also use our 'Find UnBlend' locator on our website to find the nearest store that carries our products.",
-  },
-  {
     question: "Are UnBlend products organic?",
     answer:
       "While we prioritize high-quality ingredients and sustainable farming practices, not all UnBlend products are certified organic. We do offer an organic line, which is clearly labeled on the packaging.",
@@ -88,10 +83,15 @@ export default function FAQPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <main className="container mx-auto px-4 py-24">
-        <h1 className="text-4xl font-bold text-center text-unblend-navy mb-12">
+      <main className="container mx-auto px-4 py-32">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-4xl md:text-5xl font-bold text-center text-unblend-navy mb-8"
+        >
           Frequently Asked Questions
-        </h1>
+        </motion.h1>
         <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
           {faqs.map((faq, index) => (
             <FAQItem key={index} question={faq.question} answer={faq.answer} />

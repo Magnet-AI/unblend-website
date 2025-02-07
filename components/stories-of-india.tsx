@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const stories = [
   {
@@ -24,9 +25,19 @@ const stories = [
     image:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a%20women%2028%20years%20old,%20urban%20indian%20women%20in%20india.jpg-WZqJ7GZAE4qoyUMwSmiYRmFZIQUzlB.jpeg",
   },
+  {
+    title: "Enhancing Daily Life with Better Coffee",
+    description:
+      "Rajesh's potential discovery of improved health through his daily coffee ritual",
+    content: `Rajesh, a 45-year-old office worker from Mumbai, starts each day with his cherished cup of coffee. "It's my morning ritual, but lately I've been wondering if I could make it healthier," he shares. Rajesh has heard about a new milk that could transform his daily brew. "UnBlend milk could offer more protein and less sugar, it might be a game-changer for my health," he muses. "Plus, makeing my coffee creamier and tastier, that would be a bonus!" Rajesh is excited about the possibility of enhancing his beloved morning routine. "It's amazing to think that simply changing the milk in my coffee could have such a positive impact on my overall health and well-being."`,
+    image:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a%20indian%20person%20drinking%20coffee%20after%20a%20walk%20in%20his%20living%20room%20with%20the%20sports%20short%20and%20%20running%20shirt%20a%2045%20years%20old.%20in.jpg-ByWmx2JthTKpnwHkDZEUZVE6dD4Ygz.jpeg",
+  },
 ];
 
 export function StoriesOfIndia() {
+  const [expanded, setExpanded] = useState(null);
+
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
@@ -44,16 +55,16 @@ export function StoriesOfIndia() {
             common health and nutrition challenges
           </p>
         </motion.div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
           {stories.map((story, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden"
+              className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden flex flex-col h-full"
             >
-              <div className="relative h-64">
+              <div className="relative h-64 w-full">
                 <Image
                   src={story.image || "/placeholder.svg"}
                   alt={story.title}
@@ -61,18 +72,23 @@ export function StoriesOfIndia() {
                   className="object-cover"
                 />
               </div>
-              <div className="p-6">
+              <div className="p-6 flex-grow flex flex-col">
                 <h3 className="text-2xl font-bold text-unblend-navy mb-2">
                   {story.title}
                 </h3>
                 <p className="text-sm text-gray-600 mb-4">
                   {story.description}
                 </p>
-                <p className="text-gray-700 leading-relaxed line-clamp-4">
-                  {story.content}
+                <p className="text-gray-700 leading-relaxed flex-grow">
+                  {expanded === index
+                    ? story.content
+                    : story.content.slice(0, 120) + "..."}
                 </p>
-                <button className="mt-4 text-unblend-blue hover:text-unblend-navy transition-colors">
-                  Read more
+                <button
+                  className="mt-4 text-unblend-blue hover:text-unblend-navy transition-colors self-start"
+                  onClick={() => setExpanded(expanded === index ? null : index)}
+                >
+                  {expanded === index ? "Read less" : "Read more"}
                 </button>
               </div>
             </motion.div>

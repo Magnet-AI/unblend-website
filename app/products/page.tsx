@@ -6,100 +6,131 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useEffect } from "react";
+import { Quicksand } from "next/font/google";
+
+const quicksand = Quicksand({ subsets: ["latin"] });
 
 const products = [
   {
     id: "chocolate-protein-milkshake",
     name: "Protein Shake",
     description:
-      "Delicious chocolate flavor packed with high-quality protein for muscle recovery and growth",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image%201-28-25%20at%2011.27%E2%80%AFAM-AbDaOD3MNDkKPuHDv26U9NqAAR4KPD.jpeg",
+      "Your everyday protein boost—24g of natural goodness when your diet needs a lift.",
+    image: "./two_protein_shake.png",
     features: [
       { label: "PROTEIN", value: "24g" },
       { label: "FLAVOR", value: "RICH" },
-      { label: "SUGAR", value: "LOW" },
+      { label: "CALCIUM", value: "HIGH" },
     ],
     color: "chocolate",
+    servingSize: "400ml",
+    nutritionInfo: {
+      totalFat: "5g",
+      saturatedFat: "3g",
+      carbohydrates: "6g",
+      sugar: "5g",
+      protein: "24g",
+      lactoseFree: "Yes",
+    },
   },
   {
     id: "standardized-milk",
     name: "Standardized Milk",
     description:
-      "Perfectly balanced for everyday nutrition with essential nutrients in every glass",
-    image: "/placeholder.svg?height=800&width=600",
+      "Perfectly balanced for everyday nutrition with essential nutrients in every glass. Rich in vitamins and minerals.",
+    image: "./standardized_milk.png",
     features: [
-      { label: "PROTEIN", value: "HIGH" },
-      { label: "SUGAR", value: "LESS" },
-      { label: "CALCIUM", value: "HIGH" },
+      { label: "PROTEIN", value: "12g" },
+      { label: "SUGAR", value: "9g" },
+      { label: "FAT", value: "9g" },
     ],
     color: "orange",
+    servingSize: "200ml",
+    nutritionInfo: {
+      totalFat: "9g",
+      saturatedFat: "5g",
+      carbohydrates: "8g",
+      sugar: "9g",
+      protein: "12g",
+      lactoseFree: "Yes",
+    },
   },
   {
     id: "full-cream-milk",
     name: "Full Cream Milk",
     description:
-      "Rich and creamy, straight from nature's best for indulgent taste",
-    image: "/placeholder.svg?height=800&width=600",
+      "Rich and creamy, straight from nature's best for indulgent taste. Rich in vitamins and minerals.",
+    image: "./full_cream_milk.png",
     features: [
-      { label: "CREAM", value: "FULL" },
-      { label: "PROTEIN", value: "HIGH" },
-      { label: "SUGAR", value: "LESS" },
+      { label: "PROTEIN", value: "12g" },
+      { label: "FAT", value: "12g" },
+      { label: "SUGAR", value: "9g" },
     ],
     color: "green",
+    servingSize: "200ml",
+    nutritionInfo: {
+      totalFat: "12g",
+      saturatedFat: "5g",
+      carbohydrates: "10g",
+      sugar: "9g",
+      protein: "12g",
+      lactoseFree: "Yes",
+    },
   },
   {
     id: "toned-milk",
     name: "Toned Milk",
     description:
-      "Light and nutritious, perfect for the health conscious lifestyle",
-    image: "/placeholder.svg?height=800&width=600",
+      "Light and nutritious, perfect for the health conscious lifestyle. Rich in vitamins and minerals.",
+    image: "./toned_milk.png",
     features: [
-      { label: "LOW FAT", value: "YES" },
-      { label: "PROTEIN", value: "HIGH" },
-      { label: "SUGAR", value: "LESS" },
+      { label: "PROTEIN", value: "12g" },
+      { label: "FAT", value: "6g" },
+      { label: "SUGAR", value: "8g" },
     ],
     color: "blue",
+    servingSize: "200ml",
+    nutritionInfo: {
+      totalFat: "6g",
+      saturatedFat: "5g",
+      carbohydrates: "8g",
+      sugar: "8g",
+      protein: "12g",
+      lactoseFree: "Yes",
+    },
   },
 ];
 
 const getColorClasses = (color: string) => {
   switch (color) {
     case "blue":
-      return "text-blue-600";
-    case "orange":
-      return "text-orange-600";
+      return "from-blue-500 to-blue-700 text-white";
     case "green":
-      return "text-green-600";
+      return "from-green-500 to-green-700 text-white";
+    case "orange":
+      return "from-orange-500 to-orange-700 text-white";
     case "chocolate":
-      return "text-amber-900";
+      return "from-amber-700 to-amber-900 text-white";
     default:
-      return "text-gray-700";
+      return "from-gray-500 to-gray-700 text-white";
   }
 };
 
 export default function ProductsPage() {
-  useEffect(() => {
-    try {
-      console.log("Products:", JSON.stringify(products));
-    } catch (error) {
-      console.error("Error stringifying products:", error);
-    }
-  }, []);
-
   return (
-    <div className="min-h-screen bg-blue-50">
+    <div className="min-h-screen bg-white">
       <Navbar />
 
       {products.map((product, index) => (
         <section
           key={product.id}
-          className="relative min-h-screen flex items-center"
+          className={`relative min-h-screen flex items-center bg-gradient-to-br ${getColorClasses(
+            product.color
+          )}`}
         >
           <div className="absolute inset-x-0 bottom-0">
             <svg
-              viewBox="0 0 1440 320"
+              viewBox="0 0 1440 290"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               className="text-white"
@@ -122,7 +153,7 @@ export default function ProductsPage() {
                   index % 2 === 0 ? "lg:order-1" : "lg:order-2"
                 }`}
               >
-                <div className="relative h-[600px] w-full">
+                <div className="relative h-[600px] w-full scale-150">
                   <Image
                     src={product.image || "/placeholder.svg"}
                     alt={product.name}
@@ -147,20 +178,20 @@ export default function ProductsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <h2 className="text-2xl font-medium mb-4 italic">
+                  <h2
+                    className={`text-2xl font-normal mb-4 text-white/90 ${quicksand.className}`}
+                  >
                     {product.id === "chocolate-protein-milkshake"
-                      ? "chocolate"
-                      : "ultra-filtered"}
+                      ? "CHOCOLATE"
+                      : "ULTRA-FILTERED MILK"}
                   </h2>
                   <h1
-                    className={`text-4xl lg:text-6xl font-bold mb-6 ${getColorClasses(
-                      product.color
-                    )}`}
+                    className={`text-4xl lg:text-6xl font-light mb-6 text-white ${quicksand.className}`}
                   >
                     {product.name}
                   </h1>
 
-                  <p className="text-xl lg:text-2xl mb-12 text-gray-800">
+                  <p className="text-xl lg:text-2xl mb-12 text-white/80">
                     {product.description}
                   </p>
                 </motion.div>
@@ -173,56 +204,63 @@ export default function ProductsPage() {
                 >
                   {product.features.map((feature, idx) => (
                     <div key={idx} className="text-center">
-                      <div
-                        className={`text-5xl lg:text-6xl font-bold mb-2 ${getColorClasses(
-                          product.color
-                        )}`}
-                      >
+                      <div className="text-5xl lg:text-6xl font-bold mb-2 text-white">
                         {feature.value}
                       </div>
-                      <div className="text-sm lg:text-base font-semibold text-gray-700">
+                      <div className="text-sm lg:text-base font-semibold text-white/90">
                         {feature.label}
                       </div>
                     </div>
                   ))}
                 </motion.div>
 
-                {product.id !== "chocolate-protein-milkshake" && (
+                {product.nutritionInfo && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
-                    className="text-center mb-12"
+                    className="mb-12 bg-white/20 backdrop-blur-sm p-6 rounded-xl"
                   >
-                    <div
-                      className={`text-3xl lg:text-4xl font-bold mb-2 ${getColorClasses(
-                        product.color
-                      )}`}
-                    >
-                      HIGH
-                    </div>
-                    <div className="text-sm lg:text-base font-semibold text-gray-700">
-                      CALCIUM
+                    <h3 className="text-2xl font-bold text-white">
+                      Nutrition Information
+                    </h3>
+                    <p className="text-lg text-white/90 mb-4">
+                      Per {product.servingSize} serving:
+                    </p>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {Object.entries(product.nutritionInfo).map(
+                        ([key, value]) => (
+                          <div key={key} className="text-center">
+                            <div className="text-3xl font-bold text-white">
+                              {value}
+                            </div>
+                            <div className="text-sm font-semibold text-white/90">
+                              {key
+                                .replace(/([A-Z])/g, " $1")
+                                .trim()
+                                .toUpperCase()}
+                            </div>
+                          </div>
+                        )
+                      )}
                     </div>
                   </motion.div>
                 )}
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.6 }}
-                  className="relative z-10 flex justify-center lg:justify-start mb-16"
+                  className="relative z-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                 >
-                  <Link href={`/products/${product.id}`}>
-                    <Button
-                      size="lg"
-                      className="bg-white text-unblend-navy border-2 border-unblend-navy px-8 py-6 rounded-full 
-             text-lg font-semibold tracking-wide transition-all duration-300 
-             hover:bg-unblend-navy hover:text-white hover:border-blue-700 
-             shadow-md hover:shadow-lg active:scale-95"
+                  <Link href={`/products/${product.id}`} passHref>
+                    <motion.button
+                      transition={{ duration: 0.2 }}
+                      className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white text-lg px-10 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-blue-300"
+                      aria-label={`Learn more about ${product.name}`}
                     >
                       Learn More
-                    </Button>
+                    </motion.button>
                   </Link>
                 </motion.div>
               </motion.div>

@@ -5,6 +5,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Activity, Clock, Leaf, StickerIcon as Stomach } from "lucide-react";
 import Link from "next/link";
+import { Quicksand } from "next/font/google";
+
+const quicksand = Quicksand({ subsets: ["latin"] });
 
 export function Hero() {
   const containerVariants = {
@@ -38,20 +41,24 @@ export function Hero() {
         >
           <div className="text-unblend-navy space-y-8">
             <motion.div variants={itemVariants} className="space-y-4">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-2 mt-6">
-                <span className="text-unblend-navy font-extrabold">
-                  MORE
+              <h1
+                className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-2 mt-6 ${quicksand.className}`}
+              >
+                <span className="text-unblend-navy">
+                  More
                   <br />
-                  PROTEIN.
+                  Protein.
                 </span>
                 <br />
-                <span className="text-unblend-navy font-extrabold">
-                  BETTER
+                <span className="text-unblend-navy  font-normal">
+                  Better
                   <br />
-                  TASTE.
+                  Taste.
                 </span>
               </h1>
-              <p className="text-xl font-semibold text-unblend-navy/80 pb-5 rounded-lg inline-block">
+              <p
+                className={`text-xl font-bold text-unblend-navy pb-5 rounded-lg inline-block ${quicksand.className}`}
+              >
                 Experience the perfect blend of health, taste, and convenience.
               </p>
             </motion.div>
@@ -72,27 +79,31 @@ export function Hero() {
             variants={containerVariants}
             className="relative w-full aspect-square max-w-2xl mx-auto"
           >
-            <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full h-full">
+            <div className="grid grid-cols-2 grid-rows-2 gap-7 w-full h-full">
               {[
                 {
-                  color: "green",
+                  color: "chocolate",
                   image:
-                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/like%20this%20in%20one%20liter%20i%20need%20it%20to%20for%20my%20company.%20a%20milk%20company%20for%20unblend.%20i%20need%20the%20packing%20to%20be%20like%20in%20the%20picture%20added%20.jpg-B1D8a2nAaD4HtKn2BWQQn1Z7MVctga.jpeg",
+                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora%20(7)-R9Q1AODjOKu7D1ikL0vSJ9w0d5wsOS.png",
+                  id: "chocolate-protein-milkshake",
+                },
+                {
+                  color: "standarized",
+                  image:
+                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora-j8elbYLu7SmUOWRCOIbCmS5H6ZDdcr.png",
+                  id: "standardized-milk",
                 },
                 {
                   color: "cream",
                   image:
-                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/like%20this%20in%20one%20liter%20i%20need%20it%20to%20for%20my%20company.%20a%20milk%20company%20for%20unblend.%20i%20need%20the%20packing%20to%20be%20like%20in%20the%20picture%20added.%20i%20don't%20need%20cow%20image%20in%20the%20pack%20rather%20add%20%20cup%20of%20coffee.jpg-LJKfHIuByU0CTupTMpwOvvxlAPcmzd.jpeg",
+                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora%20(8)-ntCulrUry7TnmUxuHq8Ts4E0bKuMRU.png",
+                  id: "full-cream-milk",
                 },
                 {
-                  color: "chocolate",
+                  color: "toned",
                   image:
-                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image%201-28-25%20at%2011.27%E2%80%AFAM-45FmXSC6UvHfdG24xgCWzChW6bLTqz.jpeg",
-                },
-                {
-                  color: "unflavored",
-                  image:
-                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/like%20this%20in%20one%20liter%20i%20need%20it%20to%20for%20my%20company.%20a%20milk%20company%20for%20unblend.%20i%20need%20the%20packing%20to%20be%20like%20in%20the%20picture%20added.%20i%20don't%20need%20cow%20image%20in%20the%20pack%20rather%20add%20%20protein%20shake.%20.jpg-aSBVeijq4hyI1Dx4L9v7ykIM8PCE83.jpeg",
+                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora%20(1)-LX9Ati1OeZWcUjdshqQFel0VhR1gVF.png",
+                  id: "toned-milk",
                 },
               ].map((bottle, index) => (
                 <motion.div
@@ -102,14 +113,16 @@ export function Hero() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-300">
-                    <Image
-                      src={bottle.image || "/placeholder.svg"}
-                      alt={`UnBlend ${bottle.color} milk`}
-                      layout="fill"
-                      objectFit="cover"
-                      className="transition-transform duration-300 group-hover:scale-110"
-                    />
+                  <div className="relative mt-10 w-full h-full rounded-2xl overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <Link href={`/products/${bottle.id}`} passHref>
+                      <Image
+                        src={bottle.image || "/placeholder.svg"}
+                        alt={`UnBlend ${bottle.color} milk`}
+                        layout="fill"
+                        objectFit="cover"
+                        className="transition-transform duration-300 scale-125 group-hover:scale-150"
+                      />
+                    </Link>
                   </div>
                 </motion.div>
               ))}

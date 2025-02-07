@@ -1,34 +1,18 @@
 "use client";
+
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Dumbbell, Heart, Coffee, Zap } from "lucide-react";
-import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function ChocolateProteinMilkshakePage() {
-  useEffect(() => {
-    try {
-      console.log(
-        "Chocolate Protein Milkshake:",
-        safeStringify({
-          name: "Chocolate Protein Milkshake",
-          description:
-            "Indulge in the rich, chocolatey goodness packed with high-quality protein for muscle recovery and growth.",
-          image:
-            "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image%201-28-25%20at%2011.27%E2%80%AFAM-AbDaOD3MNDkKPuHDv26U9NqAAR4KPD.jpeg",
-        })
-      );
-    } catch (error) {
-      console.error("Error in useEffect:", error);
-    }
-  }, []);
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-amber-100 to-white">
       <Navbar />
-      <main className="container mx-auto px-4 py-24">
+      <main className="container mx-auto px-4 py-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -50,9 +34,9 @@ export default function ChocolateProteinMilkshakePage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-lg">
+            <div className="relative h-[500px] rounded-2xl scale-150">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Image%201-28-25%20at%2011.27%E2%80%AFAM-AbDaOD3MNDkKPuHDv26U9NqAAR4KPD.jpeg"
+                src="../two_protein_shake.png"
                 alt="Chocolate Protein Milkshake"
                 fill
                 className="object-cover"
@@ -116,29 +100,40 @@ export default function ChocolateProteinMilkshakePage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="bg-amber-50 rounded-2xl p-8 mb-16"
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="relative z-10 bg-amber-50 rounded-2xl p-24 mb-16"
         >
           <h2 className="text-3xl font-bold text-amber-800 mb-6 text-center">
-            Ideal For
+            Nutrition Facts
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              "Fitness enthusiasts and athletes",
-              "Those looking to increase protein intake",
-              "Busy professionals needing a quick snack",
-              "Chocolate lovers seeking a healthier option",
-            ].map((item, index) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                className="bg-white p-4 rounded-xl shadow-md text-center"
-              >
-                <p className="text-amber-800 font-semibold">{item}</p>
-              </motion.div>
-            ))}
+          <div className="bg-white p-6 rounded-xl shadow-md max-w-md mx-auto">
+            <h3 className="text-xl font-semibold mb-4">Serving Size: 400ml</h3>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span className="font-medium">Calories</span>
+                <span>180</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium">Total Fat</span>
+                <span>5g</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium">Saturated Fat</span>
+                <span>3g</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium">Carbohydrates</span>
+                <span>6g</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium">Sugar</span>
+                <span>5g</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium">Protein</span>
+                <span>24g</span>
+              </div>
+            </div>
           </div>
         </motion.div>
 
@@ -161,19 +156,15 @@ export default function ChocolateProteinMilkshakePage() {
                 Back to All Products
               </Button>
             </Link>
+            <Link href="/find-unblend">
+              <Button className="bg-white text-amber-800 border-2 border-amber-800 hover:bg-amber-50 px-8 py-3 rounded-full text-lg">
+                Find Near You
+              </Button>
+            </Link>
           </div>
         </motion.div>
       </main>
       <Footer />
     </div>
   );
-}
-
-function safeStringify(obj: any) {
-  try {
-    return JSON.stringify(obj);
-  } catch (error) {
-    console.error("Error stringifying object:", error);
-    return JSON.stringify({ error: "Unable to stringify object" });
-  }
 }
