@@ -35,11 +35,10 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_ISLAND_05507D610 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          ###### Repository/Build Configurations ######
-          skip_app_build: true    # <-- Skip Oryx build so it doesn't run 'npm install' again
-          app_location: "/"       # Path to your app (the root in your case)
-          output_location: ".next" # Path to your built Next.js output
-          ###### End of Repository/Build Configurations ######
+    ###### Repository/Build Configurations ######
+          app_build_command: "npm install --legacy-peer-deps && npm run build"  # Override default
+          app_location: "/"
+          output_location: ".next"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
