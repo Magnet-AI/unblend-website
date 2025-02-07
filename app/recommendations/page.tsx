@@ -1,7 +1,7 @@
-
 "use client";
 
-export const dynamic = "force-dynamic"; 
+// Force Next.js to treat this page as dynamic
+export const dynamic = "force-dynamic";
 
 import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
@@ -11,6 +11,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/navbar";
 
+// ---------------------
+// Interface definitions
+// ---------------------
 interface Product {
   id: string;
   name: string;
@@ -26,13 +29,16 @@ interface Product {
   suitableFor: string[];
 }
 
+// ------------------------------------
+// Static product data (in `public` dir)
+// ------------------------------------
 const products: Product[] = [
   {
     id: "standardized-milk",
     name: "Standardized Milk",
     description:
       "Perfectly balanced for everyday nutrition with essential nutrients in every glass.",
-    image: "./standardized_milk.png",
+    image: "/standardized_milk.png",
     nutritionInfo: {
       totalFat: "9",
       saturatedFat: "5",
@@ -52,7 +58,7 @@ const products: Product[] = [
     name: "Full Cream Milk",
     description:
       "Rich and creamy, straight from nature's best for indulgent taste.",
-    image: "./full_cream_milk.png",
+    image: "/full_cream_milk.png",
     nutritionInfo: {
       totalFat: "12",
       saturatedFat: "5",
@@ -72,7 +78,7 @@ const products: Product[] = [
     name: "Toned Milk",
     description:
       "Light and nutritious, perfect for the health conscious lifestyle.",
-    image: "./toned_milk.png",
+    image: "/toned_milk.png",
     nutritionInfo: {
       totalFat: "6",
       saturatedFat: "5",
@@ -92,7 +98,7 @@ const products: Product[] = [
     name: "Protein Shake",
     description:
       "Your everyday protein boost—24g of natural goodness when your diet needs a lift.",
-    image: "./protein_shake.png",
+    image: "/protein_shake.png",
     nutritionInfo: {
       totalFat: "5",
       saturatedFat: "3",
@@ -109,7 +115,16 @@ const products: Product[] = [
   },
 ];
 
-const calculateScore = (answers: (string | string[])[]) => {
+// -----------------------
+// Helper function: scoring
+// -----------------------
+function calculateScore(answers: (string | string[])[]): {
+  proteinScore: number;
+  fatScore: number;
+  sugarScore: number;
+  isFitnessEnthusiast: boolean;
+  isHealthConscious: boolean;
+} {
   let proteinScore = 0;
   let fatScore = 0;
   let sugarScore = 0;
@@ -153,31 +168,22 @@ const calculateScore = (answers: (string | string[])[]) => {
     }
   });
 
-  return {
-    proteinScore,
-    fatScore,
-    sugarScore,
-    isFitnessEnthusiast,
-    isHealthConscious,
-  };
-};
+  return { proteinScore, fatScore, sugarScore, isFitnessEnthusiast, isHealthConscious };
+}
 
-const getRecommendedProducts = (scores: {
+// ----------------------------------------
+// Helper function: get recommended products
+// ----------------------------------------
+function getRecommendedProducts(scores: {
   proteinScore: number;
   fatScore: number;
   sugarScore: number;
   isFitnessEnthusiast: boolean;
   isHealthConscious: boolean;
-}) => {
-  const {
-    proteinScore,
-    fatScore,
-    sugarScore,
-    isFitnessEnthusiast,
-    isHealthConscious,
-  } = scores;
+}): Product[] {
+  const { proteinScore, fatScore, sugarScore, isFitnessEnthusiast, isHealthConscious } = scores;
 
-  // Sort milk products (excluding the protein shake) based on the combined score
+  // Filter out the protein shake for the initial sorting
   const sortedMilkProducts = products
     .filter((p) => p.id !== "chocolate-protein-milkshake")
     .sort((a, b) => {
@@ -185,47 +191,57 @@ const getRecommendedProducts = (scores: {
         proteinScore * Number.parseInt(a.nutritionInfo.protein) +
         fatScore * Number.parseInt(a.nutritionInfo.totalFat) +
         sugarScore * Number.parseInt(a.nutritionInfo.sugar);
+
       const bScore =
         proteinScore * Number.parseInt(b.nutritionInfo.protein) +
         fatScore * Number.parseInt(b.nutritionInfo.totalFat) +
         sugarScore * Number.parseInt(b.nutritionInfo.sugar);
-      return bScore - aScore;
+
+      return bScore - aScore; // Higher is better
     });
 
-  // Take the top 2 from that sorting
+  // Take the top 2
   const recommendations = sortedMilkProducts.slice(0, 2);
 
-  // Include the protein shake if user is fitness enthusiast or health conscious or high protein score
+  // Decide if we should add protein shake or the 3rd best milk
   if (isFitnessEnthusiast || isHealthConscious || proteinScore > 3) {
-    recommendations.push(
-      products.find((p) => p.id === "chocolate-protein-milkshake")!
-    );
+    // Add the protein shake as a recommendation
+    const proteinShake = products.find((p) => p.id === "chocolate-protein-milkshake");
+    if (proteinShake) {
+      recommendations.push(proteinShake);
+    }
   } else {
-    // Otherwise, just push the third best among the milk products
+    // Otherwise, push the third best milk
     recommendations.push(sortedMilkProducts[2]);
   }
 
   return recommendations;
-};
+}
 
-const getPersonalizedReasons = (product: Product, index: number) => {
+// --------------------------------------
+// Helper function: personalized reasons
+// --------------------------------------
+function getPersonalizedReasons(product: Product, index: number): string[] {
   const reasons: string[] = [];
 
   if (product.id === "standardized-milk") {
     reasons.push("Balanced nutrition for your active lifestyle");
     reasons.push("Supports your daily calcium and protein needs");
-    if (index === 0)
+    if (index === 0) {
       reasons.push("Best all-around choice based on your preferences");
+    }
   } else if (product.id === "full-cream-milk") {
     reasons.push("Rich taste to satisfy your indulgent cravings");
     reasons.push("Higher calorie content to support your energy needs");
-    if (index === 0)
+    if (index === 0) {
       reasons.push("Aligns with your preference for full-bodied dairy");
+    }
   } else if (product.id === "toned-milk") {
     reasons.push("Lower fat content suits your health-conscious choices");
     reasons.push("Provides essential nutrients without excess calories");
-    if (index === 0)
+    if (index === 0) {
       reasons.push("Matches your preference for lighter dairy options");
+    }
   } else if (product.id === "chocolate-protein-milkshake") {
     reasons.push("High protein content to support your fitness goals");
     reasons.push("Convenient option for post-workout recovery");
@@ -233,40 +249,61 @@ const getPersonalizedReasons = (product: Product, index: number) => {
   }
 
   return reasons;
-};
+}
 
+// -----------------
+// Main Page Component
+// -----------------
 export default function RecommendationsPage() {
   const [recommendations, setRecommendations] = useState<Product[]>([]);
   const searchParams = useSearchParams();
-  const answers = useMemo(() => searchParams.get("answers"), [searchParams]);
 
+  // Safely get the 'answers' param from the URL
+  const answersParam = useMemo(() => searchParams.get("answers"), [searchParams]);
+
+  // Parse and compute recommendations if answersParam exists
   useEffect(() => {
-    if (answers) {
-      const parsedAnswers = JSON.parse(decodeURIComponent(answers));
+    if (!answersParam) {
+      // No 'answers' param found in URL, so do nothing or show fallback
+      return;
+    }
+
+    try {
+      const decoded = decodeURIComponent(answersParam);
+      const parsedAnswers = JSON.parse(decoded);
       const scores = calculateScore(parsedAnswers);
       const recommendedProducts = getRecommendedProducts(scores);
       setRecommendations(recommendedProducts);
+    } catch (error) {
+      console.error("Failed to parse 'answers' query param:", error);
+      // Optionally set an error state or handle differently
     }
-  }, [answers]);
+  }, [answersParam]);
 
+  // -----------------
+  // Conditional render
+  // -----------------
   if (recommendations.length === 0) {
+    // Fallback content when no recommendations are available
     return (
       <div className="min-h-screen bg-gradient-to-br from-unblend-blue via-unblend-navy to-purple-600 py-24 flex items-center justify-center">
         <div className="text-white text-center">
-          <h1 className="text-4xl font-bold mb-4">Analyzing your answers...</h1>
+          <h1 className="text-4xl font-bold mb-4">No Recommendations Yet</h1>
           <p className="text-xl">
-            We're finding the perfect UnBlend products for you.
+            Please complete the questionnaire or check your query parameter.
           </p>
         </div>
       </div>
     );
   }
 
+  // If we have recommendations, show them
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen">
       <Navbar />
       <div className="bg-gradient-to-br from-unblend-blue via-unblend-navy to-purple-600">
         <div className="py-32 px-4 md:px-8 max-w-7xl mx-auto">
+
           <motion.div
             className="text-center text-white mb-12"
             initial={{ opacity: 0, y: 20 }}
@@ -291,15 +328,18 @@ export default function RecommendationsPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <div className="relative bg-white shadow-xl rounded-xl overflow-hidden md:flex hover:shadow-2xl transition-shadow">
+                  {/* Image Section */}
                   <div className="w-full md:w-1/3 relative h-64 md:h-auto">
                     <Image
-                      src={product.image || "/placeholder.svg"}
+                      src={product.image}
                       alt={product.name}
                       fill
                       className="object-contain p-4 scale-125"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
                     />
                   </div>
+
+                  {/* Text Content Section */}
                   <div className="w-full md:w-2/3 p-6 md:p-8 flex flex-col justify-center">
                     <div className="mb-3">
                       <span className="uppercase tracking-wide text-xs font-semibold text-unblend-blue">
