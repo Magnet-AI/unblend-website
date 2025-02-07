@@ -1,164 +1,344 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { Product, getRecommendedProducts } from "@/data/quiz-recommendations";
 import { Navbar } from "@/components/navbar";
-import { ShoppingCart, Heart } from "lucide-react";
+
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  nutritionInfo: {
+    totalFat: string;
+    saturatedFat: string;
+    carbohydrates: string;
+    sugar: string;
+    protein: string;
+  };
+  suitableFor: string[];
+}
+
+const products: Product[] = [
+  {
+    id: "standardized-milk",
+    name: "Standardized Milk",
+    description:
+      "Perfectly balanced for everyday nutrition with essential nutrients in every glass.",
+    image: "./standardized_milk.png",
+    nutritionInfo: {
+      totalFat: "9",
+      saturatedFat: "5",
+      carbohydrates: "8",
+      sugar: "9",
+      protein: "12",
+    },
+    suitableFor: [
+      "Daily nutrition",
+      "Balanced diet",
+      "Families",
+      "Growing children",
+    ],
+  },
+  {
+    id: "full-cream-milk",
+    name: "Full Cream Milk",
+    description:
+      "Rich and creamy, straight from nature's best for indulgent taste.",
+    image: "./full_cream_milk.png",
+    nutritionInfo: {
+      totalFat: "12",
+      saturatedFat: "5",
+      carbohydrates: "10",
+      sugar: "9",
+      protein: "12",
+    },
+    suitableFor: [
+      "High-calorie needs",
+      "Baking and cooking",
+      "Weight gain",
+      "Elderly nutrition",
+    ],
+  },
+  {
+    id: "toned-milk",
+    name: "Toned Milk",
+    description:
+      "Light and nutritious, perfect for the health conscious lifestyle.",
+    image: "./toned_milk.png",
+    nutritionInfo: {
+      totalFat: "6",
+      saturatedFat: "5",
+      carbohydrates: "8",
+      sugar: "8",
+      protein: "12",
+    },
+    suitableFor: [
+      "Weight management",
+      "Low-fat diet",
+      "Calorie-conscious",
+      "Mild lactose sensitivity",
+    ],
+  },
+  {
+    id: "chocolate-protein-milkshake",
+    name: "Protein Shake",
+    description:
+      "Your everyday protein boost—24g of natural goodness when your diet needs a lift.",
+    image: "./protein_shake.png",
+    nutritionInfo: {
+      totalFat: "5",
+      saturatedFat: "3",
+      carbohydrates: "6",
+      sugar: "5",
+      protein: "24",
+    },
+    suitableFor: [
+      "Fitness enthusiasts",
+      "Athletes",
+      "High protein needs",
+      "Muscle recovery",
+    ],
+  },
+];
+
+const calculateScore = (answers: (string | string[])[]) => {
+  let proteinScore = 0;
+  let fatScore = 0;
+  let sugarScore = 0;
+  let isFitnessEnthusiast = false;
+  let isHealthConscious = false;
+
+  answers.forEach((answer, index) => {
+    switch (index) {
+      case 1: // Age group
+        if (answer === "18-24" || answer === "25-40") proteinScore += 2;
+        if (answer === "40+") fatScore += 1;
+        break;
+      case 2: // Lifestyle
+        if (Array.isArray(answer)) {
+          if (answer.includes("Fitness enthusiast")) {
+            proteinScore += 3;
+            isFitnessEnthusiast = true;
+          }
+          if (answer.includes("Health-conscious")) {
+            fatScore -= 1;
+            sugarScore -= 1;
+            isHealthConscious = true;
+          }
+          if (answer.includes("Milk lover")) fatScore += 1;
+        }
+        break;
+      case 3: // Health symptoms
+        if (Array.isArray(answer)) {
+          if (answer.includes("Diabetics")) sugarScore -= 2;
+          if (answer.includes("Lactose intolerance")) fatScore -= 1;
+          if (answer.includes("Bone or joint health")) proteinScore += 1;
+        }
+        break;
+      case 4: // Dairy dilemmas
+        if (Array.isArray(answer)) {
+          if (answer.includes("Need more protein")) proteinScore += 2;
+          if (answer.includes("Want less sugar")) sugarScore -= 2;
+          if (answer.includes("Watching calories")) fatScore -= 1;
+        }
+        break;
+    }
+  });
+
+  return {
+    proteinScore,
+    fatScore,
+    sugarScore,
+    isFitnessEnthusiast,
+    isHealthConscious,
+  };
+};
+
+const getRecommendedProducts = (scores: {
+  proteinScore: number;
+  fatScore: number;
+  sugarScore: number;
+  isFitnessEnthusiast: boolean;
+  isHealthConscious: boolean;
+}) => {
+  const {
+    proteinScore,
+    fatScore,
+    sugarScore,
+    isFitnessEnthusiast,
+    isHealthConscious,
+  } = scores;
+
+  // Sort milk products (excluding the protein shake) based on the combined score
+  const sortedMilkProducts = products
+    .filter((p) => p.id !== "chocolate-protein-milkshake")
+    .sort((a, b) => {
+      const aScore =
+        proteinScore * Number.parseInt(a.nutritionInfo.protein) +
+        fatScore * Number.parseInt(a.nutritionInfo.totalFat) +
+        sugarScore * Number.parseInt(a.nutritionInfo.sugar);
+      const bScore =
+        proteinScore * Number.parseInt(b.nutritionInfo.protein) +
+        fatScore * Number.parseInt(b.nutritionInfo.totalFat) +
+        sugarScore * Number.parseInt(b.nutritionInfo.sugar);
+      return bScore - aScore;
+    });
+
+  // Take the top 2 from that sorting
+  const recommendations = sortedMilkProducts.slice(0, 2);
+
+  // Include the protein shake if user is fitness enthusiast or health conscious or high protein score
+  if (isFitnessEnthusiast || isHealthConscious || proteinScore > 3) {
+    recommendations.push(
+      products.find((p) => p.id === "chocolate-protein-milkshake")!
+    );
+  } else {
+    // Otherwise, just push the third best among the milk products
+    recommendations.push(sortedMilkProducts[2]);
+  }
+
+  return recommendations;
+};
+
+const getPersonalizedReasons = (product: Product, index: number) => {
+  const reasons: string[] = [];
+
+  if (product.id === "standardized-milk") {
+    reasons.push("Balanced nutrition for your active lifestyle");
+    reasons.push("Supports your daily calcium and protein needs");
+    if (index === 0)
+      reasons.push("Best all-around choice based on your preferences");
+  } else if (product.id === "full-cream-milk") {
+    reasons.push("Rich taste to satisfy your indulgent cravings");
+    reasons.push("Higher calorie content to support your energy needs");
+    if (index === 0)
+      reasons.push("Aligns with your preference for full-bodied dairy");
+  } else if (product.id === "toned-milk") {
+    reasons.push("Lower fat content suits your health-conscious choices");
+    reasons.push("Provides essential nutrients without excess calories");
+    if (index === 0)
+      reasons.push("Matches your preference for lighter dairy options");
+  } else if (product.id === "chocolate-protein-milkshake") {
+    reasons.push("High protein content to support your fitness goals");
+    reasons.push("Convenient option for post-workout recovery");
+    reasons.push("Satisfies your need for a nutritious and tasty snack");
+  }
+
+  return reasons;
+};
 
 export default function RecommendationsPage() {
   const [recommendations, setRecommendations] = useState<Product[]>([]);
   const searchParams = useSearchParams();
+  const answers = useMemo(() => searchParams.get("answers"), [searchParams]);
 
   useEffect(() => {
-    const answersParam = searchParams.get("answers");
-    if (answersParam) {
-      try {
-        const parsedAnswers = JSON.parse(decodeURIComponent(answersParam));
-        const recommendedProducts = getRecommendedProducts(parsedAnswers);
-        setRecommendations(recommendedProducts);
-      } catch (error) {
-        console.error("Error parsing answers:", error);
-        setRecommendations([]);
-      }
+    if (answers) {
+      const parsedAnswers = JSON.parse(decodeURIComponent(answers));
+      const scores = calculateScore(parsedAnswers);
+      const recommendedProducts = getRecommendedProducts(scores);
+      setRecommendations(recommendedProducts);
     }
-  }, [searchParams]);
+  }, [answers]);
+
+  if (recommendations.length === 0) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-unblend-blue via-unblend-navy to-purple-600 py-24 flex items-center justify-center">
+        <div className="text-white text-center">
+          <h1 className="text-4xl font-bold mb-4">Analyzing your answers...</h1>
+          <p className="text-xl">
+            We're finding the perfect UnBlend products for you.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-sky-200 to-white">
+    <div className="min-h-screen ">
       <Navbar />
-      <div className="container mx-auto px-4 py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl md:text-4xl font-bold bg-gradient-to-r from-[#1E3A8A] to-[#60A5FA] bg-clip-text text-transparent mb-4">
-            Your Perfect UnBlend
-          </h1>
-          <p className="text-xl text-gray-600">
-            Based on your answers, we've crafted these personalized
-            recommendations just for you:
-          </p>
-        </motion.div>
+      <div className="bg-gradient-to-br from-unblend-blue via-unblend-navy to-purple-600">
+        <div className="py-32 px-4 md:px-8 max-w-7xl mx-auto">
+          <motion.div
+            className="text-center text-white mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h1 className="text-4xl font-extrabold mb-3">
+              Your Personalized Recommendations
+            </h1>
+            <p className="text-xl text-white/90">
+              Based on your lifestyle and preferences, we recommend:
+            </p>
+          </motion.div>
 
-        {recommendations.length > 0 ? (
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="flex flex-col gap-12">
             {recommendations.map((product, index) => (
               <motion.div
                 key={product.id}
+                className="w-full"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group"
               >
-                <div className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform group-hover:scale-105">
-                  <div className="relative h-64">
+                <div className="relative bg-white shadow-xl rounded-xl overflow-hidden md:flex hover:shadow-2xl transition-shadow">
+                  <div className="w-full md:w-1/3 relative h-64 md:h-auto">
                     <Image
                       src={product.image || "/placeholder.svg"}
                       alt={product.name}
                       fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      className="object-contain p-4 scale-125"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
                     />
                   </div>
-                  <div className="p-6">
-                    <h2 className="text-2xl font-bold text-[#1E3A8A] mb-2 group-hover:text-[#60A5FA] transition-colors duration-300">
-                      {product.name}
-                    </h2>
-                    <p className="text-gray-600 mb-4">{product.description}</p>
+                  <div className="w-full md:w-2/3 p-6 md:p-8 flex flex-col justify-center">
+                    <div className="mb-3">
+                      <span className="uppercase tracking-wide text-xs font-semibold text-unblend-blue">
+                        {index === 0
+                          ? "Top Recommendation"
+                          : `Recommendation ${index + 1}`}
+                      </span>
+                      <h2 className="mt-2 text-3xl font-bold text-unblend-navy leading-tight">
+                        {product.name}
+                      </h2>
+                    </div>
+
+                    <p className="text-gray-700 mb-5">{product.description}</p>
+
+                    {/* Personalized Reasons */}
                     <div className="mb-4">
-                      <h3 className="font-semibold text-[#1E3A8A] mb-2">
-                        Key Features:
+                      <h3 className="text-lg font-semibold text-unblend-navy mb-2">
+                        Why Ideal For You
                       </h3>
-                      <div className="grid grid-cols-3 gap-2">
-                        {Object.entries(product.features).map(
-                          ([key, value]) => (
-                            <div
-                              key={key}
-                              className="bg-gray-100 rounded-lg p-2 text-center transform transition-transform duration-300 hover:scale-105"
-                            >
-                              <span className="text-xs font-medium text-gray-600">
-                                {key.charAt(0).toUpperCase() + key.slice(1)}
-                              </span>
-                              <p className="text-sm font-bold text-[#1E3A8A]">
-                                {value}
-                                {key === "calories" ? "" : "g"}
-                              </p>
-                            </div>
+                      <ul className="space-y-1">
+                        {getPersonalizedReasons(product, index).map(
+                          (reason, idx) => (
+                            <li key={idx} className="text-gray-600 flex gap-2">
+                              <span>•</span>
+                              <span>{reason}</span>
+                            </li>
                           )
                         )}
-                      </div>
+                      </ul>
                     </div>
-                    <div className="mb-4">
-                      <h3 className="font-semibold text-[#1E3A8A] mb-2">
-                        Suitable for:
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {product.suitableFor.map((item, i) => (
-                          <span
-                            key={i}
-                            className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full transition-colors duration-300 hover:bg-blue-200"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between mt-6">
-                      <p className="text-2xl font-bold text-[#1E3A8A]">
-                        {product.price}
-                      </p>
-                      {/* <div className="flex space-x-2">
-                        <Button className="bg-[#1E3A8A] hover:bg-[#60A5FA] text-white transition-colors duration-300">
-                          <ShoppingCart className="w-5 h-5 mr-2" /> Add to Cart
-                        </Button>
-                        <Button
-                          variant="outline"
-                          className="border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white transition-colors duration-300"
-                        >
-                          <Heart className="w-5 h-5" />
-                        </Button>
-                      </div> */}
-                    </div>
+
+                    <Link href={`/products/${product.id}`}>
+                      <Button className="bg-gradient-to-r from-unblend-blue to-unblend-navy hover:from-unblend-blue/90 hover:to-unblend-navy/90 text-white font-semibold rounded-xl">
+                        Learn More
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
-        ) : (
-          <p className="text-center text-gray-600 text-xl">
-            No recommendations found. Please try the quiz again.
-          </p>
-        )}
-
-        <motion.div
-          className="mt-12 text-center space-x-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        >
-          <Link href="/">
-            <Button
-              variant="outline"
-              className="bg-white text-[#1E3A8A] border-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white transition-colors duration-300"
-            >
-              Back to Home
-            </Button>
-          </Link>
-          <Link href="/quiz">
-            <Button
-              variant="outline"
-              className="bg-white text-[#1E3A8A] border-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white transition-colors duration-300"
-            >
-              Retake Quiz
-            </Button>
-          </Link>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

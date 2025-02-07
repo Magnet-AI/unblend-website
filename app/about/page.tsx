@@ -60,9 +60,9 @@ export default function AboutPage() {
             transition={{ duration: 0.5 }}
             className="text-center max-w-4xl mx-auto mb-16"
           >
-            <h1 className="text-6xl font-bold mb-6">Our Story</h1>
+            <h1 className="text-6xl font-bold mb-6">About Us</h1>
             <p className="text-xl text-unblend-navy/80">
-            Revolutionizing milk for a better lifestyle through innovation.
+              Innovating milk for better quality, taste, & nutrition.
             </p>
           </motion.div>
         </div>

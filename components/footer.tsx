@@ -42,7 +42,7 @@ export function Footer() {
               UnBlend
             </h3>
             <p className="text-unblend-navy/80">
-              Revolutionizing milk for a better lifestyle through innovation.
+              Innovating milk for better quality, taste, & nutrition.
             </p>
           </motion.div>
           <motion.div variants={itemVariants}>
@@ -77,49 +77,38 @@ export function Footer() {
           <motion.div variants={itemVariants}>
             <h4 className="font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-unblend-navy">
-              <li>Email: info@unblend.com</li>
+              <li>Email: unblendinfo@gmail.com</li>
               <li>Phone: +91 7397751781</li>
               <li>Address: Coimbatore, India</li>
             </ul>
           </motion.div>
           <motion.div variants={itemVariants}>
-            <h4 className="font-semibold mb-4">Follow Us</h4>
             <div className="flex space-x-4">
               <Link
                 href="https://www.instagram.com/unblend_in/"
-                className="text-unblend-navy hover:text-unblend-blue transition-colors duration-300 ease-in-out"
+                className="text-unblend-navy hover:text-unblend-blue"
               >
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Instagram className="w-6 h-6" />
-                </motion.div>
+                <Instagram className="w-6 h-6" />
               </Link>
               <Link
-                href="#"
-                className="text-unblend-navy hover:text-unblend-blue transition-colors duration-300 ease-in-out"
+                href="https://chat.whatsapp.com/KhJR0jaBuj09NZDsO3ihYI"
+                className="text-unblend-navy hover:text-unblend-blue"
               >
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-6 h-6"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="w-6 h-6"
-                  >
-                    <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
-                    <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
-                  </svg>
-                </motion.div>
+                  <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                  <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
+                </svg>
               </Link>
             </div>
           </motion.div>

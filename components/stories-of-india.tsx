@@ -25,6 +25,14 @@ const stories = [
     image:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a%20women%2028%20years%20old,%20urban%20indian%20women%20in%20india.jpg-WZqJ7GZAE4qoyUMwSmiYRmFZIQUzlB.jpeg",
   },
+  {
+    title: "Enhancing Daily Life with Better Coffee",
+    description:
+      "Rajesh's potential discovery of improved health through his daily coffee ritual",
+    content: `Rajesh, a 45-year-old office worker from Mumbai, starts each day with his cherished cup of coffee. "It's my morning ritual, but lately I've been wondering if I could make it healthier," he shares. Rajesh has heard about a new milk that could transform his daily brew. "UnBlend milk could offer more protein and less sugar, it might be a game-changer for my health," he muses. "Plus, makeing my coffee creamier and tastier, that would be a bonus!" Rajesh is excited about the possibility of enhancing his beloved morning routine. "It's amazing to think that simply changing the milk in my coffee could have such a positive impact on my overall health and well-being."`,
+    image:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/a%20indian%20person%20drinking%20coffee%20after%20a%20walk%20in%20his%20living%20room%20with%20the%20sports%20short%20and%20%20running%20shirt%20a%2045%20years%20old.%20in.jpg-ByWmx2JthTKpnwHkDZEUZVE6dD4Ygz.jpeg",
+  },
 ];
 
 export function StoriesOfIndia() {
@@ -47,7 +55,7 @@ export function StoriesOfIndia() {
             common health and nutrition challenges
           </p>
         </motion.div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
           {stories.map((story, index) => (
             <motion.div
               key={index}

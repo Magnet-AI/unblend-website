@@ -7,28 +7,10 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import { quizQuestions } from "@/data/quiz-questions";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { PutCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import { v4 as uuidv4 } from "uuid";
-
-
-const AWS_ACCESS_KEY_ID="AKIAZI2LD5" + "HLWGVKHV4F"
-const AWS_SECRET_ACCESS_KEY="whQfTzu6YcxNWviMXYy"+"NArZLQh3Nf/by9IAkGAcL"
-const AWS_REGION="us-west-1"
-
-const dynamoDBClient = new DynamoDBClient({
-  region: "us-west-1",
-  credentials: {
-    accessKeyId: AWS_ACCESS_KEY_ID!,
-    secretAccessKey: AWS_SECRET_ACCESS_KEY!,
-  },
-});
-
-const docClient = DynamoDBDocumentClient.from(dynamoDBClient);
 
 export default function QuizPage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -50,46 +32,24 @@ export default function QuizPage() {
     setAnswers(newAnswers);
   };
 
-
-  const storeDataToDynamoDB = async () => {
-    try {
-      // Generate a unique responseId and ensure it's a string
-      const responseId = String(uuidv4());
-      
-  
-      const command = new PutCommand({
-        TableName: "QuizResponses",
-        Item: {
-          responseId, // this key exactly matches your table's partition key name
-          answers: JSON.stringify(answers),
-          timestamp: new Date().toISOString()
-        }
-      });
-  
-      await docClient.send(command);
-
-    } catch (error) {
-      console.error("❌ Error storing data in DynamoDB:", error);
-    }
-
-  };
-  const handleComplete = async () => {
-
-
-    // Store in AWS DynamoDB
-    await storeDataToDynamoDB();
-
+  const handleComplete = () => {
     const encodedAnswers = encodeURIComponent(JSON.stringify(answers));
     router.push(`/recommendations?answers=${encodedAnswers}`);
+  };
+
+  const handlePreviousQuestion = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
   };
 
   const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
 
   return (
-    <div>
+    <div className="min-h-screen">
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-white via-sky-200 to-white py-12 flex flex-col justify-center">
-        <div className="container mx-auto px-4 py-4">
+      <div className="min-h-screen bg-gradient-to-br from-unblend-blue via-unblend-navy to-purple-600 py-12 flex flex-col justify-center">
+        <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto mt-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -170,7 +130,7 @@ export default function QuizPage() {
                                     handleMultipleAnswer([
                                       ...currentAnswers,
                                       option,
-                                   ]);
+                                    ]);
                                   } else {
                                     handleMultipleAnswer(
                                       currentAnswers.filter((a) => a !== option)
@@ -190,17 +150,25 @@ export default function QuizPage() {
                       </div>
                     )}
 
-                    <div className="mt-8">
+                    <div className="mt-8 flex justify-between gap-4">
+                      {currentQuestion > 0 && (
+                        <Button
+                          className="flex-1 py-6 text-lg font-semibold text-white rounded-xl bg-unblend-navy hover:bg-unblend-navy/90 transition-all"
+                          onClick={handlePreviousQuestion}
+                        >
+                          <ArrowLeft className="mr-2 h-4 w-4" /> Previous
+                        </Button>
+                      )}
                       {currentQuestion === quizQuestions.length - 1 ? (
                         <Button
-                          className="w-full py-6 text-lg font-semibold text-white rounded-xl bg-black hover:bg-black/90 transition-all"
+                          className="flex-1 py-6 text-lg font-semibold text-white rounded-xl bg-unblend-navy hover:bg-unblend-navy/90 transition-all"
                           onClick={handleComplete}
                         >
                           See Results <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
                       ) : (
                         <Button
-                          className="w-full py-6 text-lg font-semibold text-white rounded-xl bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 transition-all"
+                          className="flex-1 py-6 text-lg font-semibold text-white rounded-xl bg-unblend-navy hover:bg-unblend-navy/90 transition-all"
                           onClick={() =>
                             setCurrentQuestion((prev) =>
                               Math.min(prev + 1, quizQuestions.length - 1)

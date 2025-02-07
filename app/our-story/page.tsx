@@ -5,7 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Leaf, Heart, Users, Star, Baby, Clock } from "lucide-react";
+import { Leaf, Heart, Users, Clock, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Quicksand } from "next/font/google";
@@ -38,25 +38,25 @@ const traditionalValues = [
 
 const modernBenefits = [
   {
-    title: "Perfect for Children",
+    title: "Combating Protein Deficiency",
     description:
-      "Higher protein and calcium support growing children's needs without added sugar.",
-    icon: Baby,
-    stats: "More protein",
+      "Higher protein content helps address the widespread protein deficiency in India, supporting overall health and development.",
+    icon: Activity,
+    stats: "12 grams protein per 200ml",
+  },
+  {
+    title: "Authentic & Clean Ingredients",
+    description:
+      "Made with pure, high-quality milk and no artificial additives, preserving the authenticity of traditional dairy while meeting modern nutritional needs.",
+    icon: Leaf,
+    stats: "100% natural ingredients",
   },
   {
     title: "Ideal for Busy Lives",
     description:
-      "Quick nutrition for your busy lifestyle - perfect in tea, coffee, or straight from the glass.",
+      "Quick nutrition for your busy lifestyle - perfect in tea, coffee, or straight from the glass. Just the ready-to-drinkproduct you need when you are late.",
     icon: Clock,
-    stats: "12 grams protein per glass",
-  },
-  {
-    title: "Better Value",
-    description:
-      "More nutrition per rupee compared to regular milk or protein supplements.",
-    icon: Star,
-    stats: "2x nutritional value",
+    stats: "Convenient nutrition on-the-go",
   },
 ];
 
@@ -177,7 +177,7 @@ export default function OurStoryPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-unblend-navy text-center mb-12">
-            Why UnBlend Makes Sense for Modern India
+            Why UnBlend is Essential for Modern India
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {modernBenefits.map((benefit, index) => (
