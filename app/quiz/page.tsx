@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import { quizQuestions } from "@/data/quiz-questions";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
@@ -85,13 +85,19 @@ export default function QuizPage() {
     router.push(`/recommendations?answers=${encodedAnswers}`);
   };
 
+  const handlePreviousQuestion = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
+  };
+
   const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
 
   return (
-    <div>
+    <div className="min-h-screen">
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-white via-sky-200 to-white py-12 flex flex-col justify-center">
-        <div className="container mx-auto px-4 py-4">
+      <div className="min-h-screen bg-gradient-to-br from-unblend-blue via-unblend-navy to-purple-600 py-12 flex flex-col justify-center">
+        <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto mt-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -192,17 +198,25 @@ export default function QuizPage() {
                       </div>
                     )}
 
-                    <div className="mt-8">
+                    <div className="mt-8 flex justify-between gap-4">
+                      {currentQuestion > 0 && (
+                        <Button
+                          className="flex-1 py-6 text-lg font-semibold text-white rounded-xl bg-unblend-navy hover:bg-unblend-navy/90 transition-all"
+                          onClick={handlePreviousQuestion}
+                        >
+                          <ArrowLeft className="mr-2 h-4 w-4" /> Previous
+                        </Button>
+                      )}
                       {currentQuestion === quizQuestions.length - 1 ? (
                         <Button
-                          className="w-full py-6 text-lg font-semibold text-white rounded-xl bg-black hover:bg-black/90 transition-all"
+                          className="flex-1 py-6 text-lg font-semibold text-white rounded-xl bg-unblend-navy hover:bg-unblend-navy/90 transition-all"
                           onClick={handleComplete}
                         >
                           See Results <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
                       ) : (
                         <Button
-                          className="w-full py-6 text-lg font-semibold text-white rounded-xl bg-[#1E3A8A] hover:bg-[#1E3A8A]/90 transition-all"
+                          className="flex-1 py-6 text-lg font-semibold text-white rounded-xl bg-unblend-navy hover:bg-unblend-navy/90 transition-all"
                           onClick={() =>
                             setCurrentQuestion((prev) =>
                               Math.min(prev + 1, quizQuestions.length - 1)

@@ -60,9 +60,9 @@ export default function AboutPage() {
             transition={{ duration: 0.5 }}
             className="text-center max-w-4xl mx-auto mb-16"
           >
-            <h1 className="text-6xl font-bold mb-6">Our Story</h1>
+            <h1 className="text-6xl font-bold mb-6">About Us</h1>
             <p className="text-xl text-unblend-navy/80">
-              Revolutionizing dairy through innovation with our tradition
+              Innovating milk for better quality, taste, & nutrition.
             </p>
           </motion.div>
         </div>
@@ -161,7 +161,7 @@ export default function AboutPage() {
               className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl"
             >
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled%2023-uff1h7r4aoFPsIHEY7oFZmwmWnVxrH.png"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/unblend-t7KlEWi0M5aq3wb9NSzxLqLwRXZjRP.png"
                 alt="Innovation in dairy processing"
                 fill
                 className="object-cover"

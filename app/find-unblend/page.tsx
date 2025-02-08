@@ -13,15 +13,16 @@ import {
 } from "react-simple-maps";
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
+import Link from "next/link";
 
 const INDIA_TOPO_JSON = "./india.json";
 
 const availableCities = [
   { name: "Bangalore", coordinates: [77.5946, 12.9716] },
-  { name: "Chennai (Coming Soon)", coordinates: [80.2707, 13.0827] },
-  { name: "Mumbai (Coming Soon)", coordinates: [72.8777, 19.076] },
-  { name: "Delhi (Coming Soon)", coordinates: [77.1025, 28.7041] },
-  { name: "Hyderabad (Coming Soon)", coordinates: [78.4867, 17.385] },
+  { name: "Chennai", coordinates: [80.2707, 13.0827] },
+  { name: "Mumbai", coordinates: [72.8777, 19.076] },
+  { name: "Delhi", coordinates: [77.1025, 28.7041] },
+  { name: "Hyderabad", coordinates: [78.4867, 17.385] },
 ];
 
 export default function FindUnBlendPage() {
@@ -116,7 +117,7 @@ export default function FindUnBlendPage() {
             transition={{ duration: 0.5, delay: 0.4 }}
           >
             <h2 className="text-2xl font-semibold text-unblend-navy mb-6">
-              Available Locations
+              Coming Soon Locations
             </h2>
             <ul className="space-y-4">
               {availableCities.map((city) => (
@@ -135,16 +136,22 @@ export default function FindUnBlendPage() {
 
             <div className="mt-12">
               <h3 className="text-xl font-semibold text-unblend-navy mb-4">
-                Can't find UnBlend near you?
+                Contact Us
               </h3>
               <p className="text-gray-600 mb-6">
-                We're constantly expanding! Leave your information, and we'll
-                notify you when UnBlend becomes available in your area.
+                Join our WhatsApp group to stay updated on UnBlend’s
+                availability in your area and get exclusive updates!
               </p>
-              <Button className="bg-unblend-navy hover:bg-unblend-navy/90 text-white">
-                <MapPin className="w-4 h-4 mr-2" />
-                Notify Me
-              </Button>
+              <Link
+                href="https://chat.whatsapp.com/KhJR0jaBuj09NZDsO3ihYI"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="bg-unblend-navy hover:bg-unblend-navy/90 text-white">
+                  <MapPin className="w-4 h-4 mr-2" />
+                  Join WhatsApp Group
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </div>

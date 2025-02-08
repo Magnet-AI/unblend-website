@@ -52,9 +52,10 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${
-        isScrolled ? "bg-white/80 backdrop-blur-md shadow-md" : "bg-transparent"
-      }`}
+      // className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${
+      //   isScrolled ? "bg-white/80 backdrop-blur-md shadow-md" : "bg-transparent"
+      // }`}
+      className="fixed w-full z-50 transition-all duration-300 ease-in-out bg-white/80 backdrop-blur-md shadow-md"
     >
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="flex items-center justify-between h-20">
@@ -71,7 +72,7 @@ export function Navbar() {
           <div className="flex-1 flex justify-center">
             <Link href="/" className="flex items-center">
               <img
-                src="./unblend_logo.png"
+                src="/unblend_logo.png"
                 alt="UnBlend Logo"
                 className="h-12 w-auto transition-opacity duration-300 ease-in-out"
                 style={{
