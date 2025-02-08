@@ -51,14 +51,33 @@ export function Navbar() {
   }, []);
 
   return (
-    <nav
-      // className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${
-      //   isScrolled ? "bg-white/80 backdrop-blur-md shadow-md" : "bg-transparent"
-      // }`}
-      className="fixed w-full z-50 transition-all duration-300 ease-in-out bg-white/80 backdrop-blur-md shadow-md"
-    >
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="flex items-center justify-between h-20">
+    <nav className="fixed w-full z-50 transition-all duration-300 ease-in-out bg-white/80 backdrop-blur-md shadow-md">
+      <div className="relative container mx-auto px-4 max-w-7xl">
+        <div className="flex items-center justify-between h-20 relative">
+          {/* Mobile Menu Button - Always Visible and Fixed to the Left */}
+          <div className="absolute left-4 lg:hidden">
+            <Button
+              className="text-unblend-navy hover:text-unblend-blue"
+              variant="ghost"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
+          </div>
+
+          {/* Centered Logo - Always Fixed in the Middle */}
+          <div className="absolute left-1/2 transform -translate-x-1/2">
+            <Link href="/" className="flex items-center">
+              <img
+                src="/unblend_logo.png"
+                alt="UnBlend Logo"
+                className="h-12 w-auto transition-opacity duration-300 ease-in-out"
+              />
+            </Link>
+          </div>
+
+          {/* Desktop Navigation - Left Side */}
           <div
             className={`hidden lg:flex items-center space-x-8 ${quicksand.variable} font-quicksand`}
           >
@@ -68,21 +87,7 @@ export function Navbar() {
             <NavLink href="/recipes">RECIPES</NavLink>
           </div>
 
-          {/* Logo in Center */}
-          <div className="flex-1 flex justify-center">
-            <Link href="/" className="flex items-center">
-              <img
-                src="/unblend_logo.png"
-                alt="UnBlend Logo"
-                className="h-12 w-auto transition-opacity duration-300 ease-in-out"
-                style={{
-                  opacity: 1,
-                }}
-              />
-            </Link>
-          </div>
-
-          {/* Desktop Menu - Right Side */}
+          {/* Desktop Navigation - Right Side */}
           <div
             className={`hidden lg:flex items-center space-x-8 ${quicksand.variable} font-quicksand`}
           >
@@ -108,18 +113,6 @@ export function Navbar() {
                 </AnimatePresence>
               </Button>
             </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
-            <Button
-              className="text-unblend-navy hover:text-unblend-blue"
-              variant="ghost"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              <Menu className="h-6 w-6" />
-            </Button>
           </div>
         </div>
 
