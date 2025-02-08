@@ -64,12 +64,12 @@ export function Hero() {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <Link href="/products">
+              <Link href="/quiz">
                 <Button
                   size="lg"
                   className="bg-unblend-navy hover:bg-unblend-navy/90 text-white text-lg px-8 py-6 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
                 >
-                  Explore Our Products
+                  Find Your Perfect Milk! 🥛✨ Take the Quiz Now →
                 </Button>
               </Link>
             </motion.div>
@@ -81,12 +81,6 @@ export function Hero() {
           >
             <div className="grid grid-cols-2 grid-rows-2 gap-7 w-full h-full">
               {[
-                {
-                  color: "chocolate",
-                  image:
-                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora%20(7)-R9Q1AODjOKu7D1ikL0vSJ9w0d5wsOS.png",
-                  id: "chocolate-protein-milkshake",
-                },
                 {
                   color: "standarized",
                   image:
@@ -104,6 +98,12 @@ export function Hero() {
                   image:
                     "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora%20(1)-LX9Ati1OeZWcUjdshqQFel0VhR1gVF.png",
                   id: "toned-milk",
+                },
+                {
+                  color: "chocolate",
+                  image:
+                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora%20(7)-R9Q1AODjOKu7D1ikL0vSJ9w0d5wsOS.png",
+                  id: "chocolate-protein-milkshake",
                 },
               ].map((bottle, index) => (
                 <motion.div

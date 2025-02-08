@@ -10,7 +10,7 @@ import { Droplet, Sun, Coffee, Utensils } from "lucide-react";
 
 export default function FullCreamMilkPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-white overflow-x-hidden">
       <Navbar />
       <main className="container mx-auto px-4 py-32">
         <motion.div
@@ -29,13 +29,13 @@ export default function FullCreamMilkPage() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16 pt-6 pb-12">
+        <div className="grid md:grid-cols-2 gap-12 items-center md:mb-16 md:pt-6 pb-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="relative h-[500px] rounded-2xl scale-150">
+            <div className="relative h-[500px] rounded-2xl md:scale-150 scale-125 mb-20 md:mb-0">
               <Image
                 src="../full_cream_milk.png"
                 alt="Full Cream Ultra-filtegreen Milk"

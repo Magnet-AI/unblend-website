@@ -10,7 +10,7 @@ import { Feather, Heart, Zap, Leaf } from "lucide-react";
 
 export default function TonedMilkPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white overflow-x-hidden">
       <Navbar />
       <main className="container mx-auto px-4 py-32">
         <motion.div
@@ -28,13 +28,13 @@ export default function TonedMilkPage() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16 pb-10">
+        <div className="grid md:grid-cols-2 gap-12 items-center md:mb-16 md:pt-6 pb-10">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="relative h-[500px] rounded-2xl scale-150">
+            <div className="relative h-[500px] rounded-2xl md:scale-150 scale-125 mb-20 md:mb-0">
               <Image
                 src="../toned_milk.png"
                 alt="Toned Ultra-filtered Milk"

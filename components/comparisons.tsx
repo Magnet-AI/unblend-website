@@ -6,22 +6,23 @@ import { Button } from "@/components/ui/button";
 
 export function Comparisons() {
   return (
-    <section className="min-h-screen flex items-center bg-white py-8">
-      <div className="container mx-auto px-4">
+    <section className="min-h-screen flex items-center bg-white py-8 px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          className="mb-8"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-unblend-navy text-center mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-unblend-navy text-center mb-4">
             Compare the Difference
           </h2>
-          <p className="text-lg text-gray-600 text-center mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-600 text-center mb-8 max-w-2xl mx-auto">
             See how UnBlend ultra-filtered milk stacks up against other options
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto space-y-4">
+        <div className="max-w-4xl mx-auto space-y-6">
           {[
             {
               title: "UnBlend Ultra-filtered Milk",
@@ -55,20 +56,20 @@ export function Comparisons() {
               transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
               className={`bg-gradient-to-r ${item.color} rounded-2xl shadow-lg overflow-hidden transform hover:scale-102 transition-transform duration-300`}
             >
-              <div className="p-10">
-                <div className="flex items-center justify-between">
+              <div className="p-4 sm:p-6 md:p-8 lg:p-10 relative">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
                   <div className="flex items-center gap-3 flex-1">
-                    <span className="text-3xl">{item.icon}</span>
+                    <span className="text-2xl sm:text-3xl">{item.icon}</span>
                     <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-1">
                         {item.title}
                       </h3>
-                      <p className="text-white/90 text-sm">
+                      <p className="text-white/90 text-xs sm:text-sm">
                         {item.description}
                       </p>
                     </div>
                   </div>
-                  <div className="flex gap-2 md:gap-4">
+                  <div className="flex gap-2 sm:gap-4 w-full sm:w-auto justify-end sm:justify-start absolute bottom-4 right-4 sm:static">
                     {item.values.map((value, idx) => (
                       <motion.div
                         key={idx}
@@ -82,11 +83,11 @@ export function Comparisons() {
                         }}
                         className="text-center"
                       >
-                        <div className="bg-white/20 rounded-full p-2 backdrop-blur-sm w-24 h-24 flex flex-col justify-center items-center">
-                          <div className="text-lg font-bold text-white">
+                        <div className="bg-white/20 rounded-full p-2 backdrop-blur-sm w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 flex flex-col justify-center items-center">
+                          <div className="text-sm sm:text-base md:text-lg font-bold text-white">
                             {value}
                           </div>
-                          <div className="text-xs text-white/90">
+                          <div className="text-[0.5rem] sm:text-xs text-white/90">
                             {item.labels[idx]}
                           </div>
                         </div>
@@ -109,7 +110,7 @@ export function Comparisons() {
               variant
             </p>
             <Link href="/products" className="inline-block">
-              <Button className="bg-unblend-navy hover:bg-unblend-navy/90 text-white px-6 py-2 rounded-full transition-all duration-300 hover:shadow-lg text-sm">
+              <Button className="bg-unblend-navy hover:bg-unblend-navy/90 text-white px-4 sm:px-6 py-2 rounded-full transition-all duration-300 hover:shadow-lg text-xs sm:text-sm">
                 Discover UnBlend Products
               </Button>
             </Link>
