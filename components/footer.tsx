@@ -66,7 +66,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="#contact"
+                  href="/find-unblend"
                   className="text-unblend-navy hover:text-unblend-blue transition-colors duration-300 ease-in-out"
                 >
                   Contact

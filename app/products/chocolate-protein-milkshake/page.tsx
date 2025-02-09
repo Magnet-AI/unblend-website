@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 
 export default function ChocolateProteinMilkshakePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-100 to-white overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-amber-100 to-white overflow-hidden">
       <Navbar />
       <main className="container mx-auto px-4 py-32">
         <motion.div
@@ -34,7 +34,7 @@ export default function ChocolateProteinMilkshakePage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="relative h-[500px] rounded-2xl md:scale-150 scale-125 mb-20 md:mb-0">
+            <div className="relative h-[500px] rounded-2xl md:scale-150 scale-125 mr-10 md:mr-0 mb-20 md:mb-0">
               <Image
                 src="../two_protein_shake.png"
                 alt="Chocolate Protein Milkshake"
@@ -152,12 +152,12 @@ export default function ChocolateProteinMilkshakePage() {
           </p>
           <div className="flex justify-center gap-4">
             <Link href="/products">
-              <Button className="bg-amber-800 hover:bg-amber-900 text-white px-8 py-3 rounded-full text-lg">
+              <Button className="bg-amber-800 hover:bg-amber-900 text-white sm:px-8 py-3 rounded-full text-lg">
                 Back to All Products
               </Button>
             </Link>
             <Link href="/find-unblend">
-              <Button className="bg-white text-amber-800 border-2 border-amber-800 hover:bg-amber-50 px-8 py-3 rounded-full text-lg">
+              <Button className="bg-white text-amber-800 border-2 border-amber-800 hover:bg-amber-50 sm:px-8 py-3 rounded-full text-lg">
                 Find Near You
               </Button>
             </Link>

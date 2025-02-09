@@ -1,26 +1,32 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Phone, Mail, MapPin, Clock } from "lucide-react"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export default function ContactPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-  }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+  };
 
   const contactInfo = [
     {
@@ -47,10 +53,10 @@ export default function ContactPage() {
       details: "Monday - Friday",
       description: "8:00 AM - 5:00 PM",
     },
-  ]
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-unblend-background/5 via-unblend-brand/5 to-unblend-background/5 pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-br from-unblend-background/5 via-unblend-brand/5 to-unblend-background/5 pt-24 pb-16 overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -58,9 +64,12 @@ export default function ContactPage() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-unblend font-bold text-unblend-background mb-4">Get in Touch</h1>
+          <h1 className="text-4xl md:text-5xl font-unblend font-bold text-unblend-background mb-4">
+            Get in Touch
+          </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Have questions about our products or services? We're here to help you find your perfect dairy blend.
+            Have questions about our products or services? We're here to help
+            you find your perfect dairy blend.
           </p>
         </motion.div>
 
@@ -72,9 +81,12 @@ export default function ContactPage() {
           >
             <Card className="shadow-lg">
               <CardHeader>
-                <CardTitle className="font-unblend text-2xl text-unblend-background">Send us a Message</CardTitle>
+                <CardTitle className="font-unblend text-2xl text-unblend-background">
+                  Send us a Message
+                </CardTitle>
                 <CardDescription>
-                  Fill out the form below and we'll get back to you as soon as possible.
+                  Fill out the form below and we'll get back to you as soon as
+                  possible.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -121,7 +133,11 @@ export default function ContactPage() {
                     disabled={isSubmitting || isSubmitted}
                     className="w-full bg-unblend-background hover:bg-unblend-background/90 text-unblend-brand font-unblend text-lg py-6"
                   >
-                    {isSubmitting ? "Sending..." : isSubmitted ? "Message Sent!" : "Send Message"}
+                    {isSubmitting
+                      ? "Sending..."
+                      : isSubmitted
+                      ? "Message Sent!"
+                      : "Send Message"}
                   </Button>
                 </form>
               </CardContent>
@@ -147,8 +163,12 @@ export default function ContactPage() {
                       <info.icon className="h-6 w-6 text-unblend-background" />
                     </div>
                     <div>
-                      <h3 className="font-unblend text-lg font-bold text-unblend-background mb-1">{info.title}</h3>
-                      <p className="text-lg font-medium text-gray-900">{info.details}</p>
+                      <h3 className="font-unblend text-lg font-bold text-unblend-background mb-1">
+                        {info.title}
+                      </h3>
+                      <p className="text-lg font-medium text-gray-900">
+                        {info.details}
+                      </p>
                       <p className="text-gray-500">{info.description}</p>
                     </div>
                   </CardContent>
@@ -176,6 +196,5 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

@@ -41,7 +41,7 @@ export function Hero() {
           <div className="text-unblend-navy space-y-6 sm:space-y-8">
             <motion.div variants={itemVariants} className="space-y-4">
               <h1
-                className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight ${quicksand.className}`}
+                className={`text-3xl sm:text-4xl md:text-5xl lg:sm:text-6xl text-5xl font-bold leading-tight ${quicksand.className}`}
               >
                 <span className="text-unblend-navy">
                   More

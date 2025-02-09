@@ -87,7 +87,7 @@ export default function HowWeDoItPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-unblend-blue/5 via-white to-unblend-blue/5">
+    <div className="min-h-screen bg-gradient-to-br from-unblend-blue/5 via-white to-unblend-blue/5 overflow-hidden">
       <Navbar />
 
       {/* Hero Section */}
@@ -110,11 +110,11 @@ export default function HowWeDoItPage() {
             transition={{ duration: 0.5 }}
             className="text-center max-w-4xl mx-auto mb-16"
           >
-            <h1 className="text-6xl font-bold text-unblend-navy mb-6 [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
+            <h1 className="sm:sm:text-6xl text-5xl text-5xl font-bold text-unblend-navy mb-6 [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
               How We Do It
             </h1>
             <p
-              className={`text-2xl font-semibold ${quicksand.variable} font-quicksand mb-4 text-unblend-navy/80`}
+              className={`sm:text-2xl text-xl font-semibold ${quicksand.variable} font-quicksand mb-4 text-unblend-navy/80`}
             >
               Discover the science behind our innovative ultra-filtered milk
             </p>
