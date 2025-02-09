@@ -120,9 +120,8 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     ;(async () => {
-      const items = await fetchDynamoDBData()
-      console.log("Fetched DynamoDB Data:", items)
-      setQuizData(items)
+      const items = await fetchDynamoDBData();
+      setQuizData(items);
     })()
   }, [])
 
