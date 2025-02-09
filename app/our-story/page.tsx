@@ -96,7 +96,7 @@ export default function OurStoryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-unblend-blue/20 via-white to-unblend-blue/20">
+    <div className="min-h-screen bg-gradient-to-br from-unblend-blue/20 via-white to-unblend-blue/20 overflow-hidden">
       <Navbar />
 
       {/* Hero Section */}

@@ -10,7 +10,7 @@ import { Feather, Heart, Zap, Leaf } from "lucide-react";
 
 export default function TonedMilkPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white overflow-hidden">
       <Navbar />
       <main className="container mx-auto px-4 py-32">
         <motion.div
@@ -152,12 +152,12 @@ export default function TonedMilkPage() {
           </p>
           <div className="flex justify-center gap-4">
             <Link href="/products">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white sm:px-8 py-3 rounded-full text-lg">
                 Back to All Products
               </Button>
             </Link>
             <Link href="/find-unblend">
-              <Button className="bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full text-lg">
+              <Button className="bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50 sm:px-8 py-3 rounded-full text-lg">
                 Find Near You
               </Button>
             </Link>

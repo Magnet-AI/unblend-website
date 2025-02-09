@@ -25,6 +25,7 @@ export const quizQuestions = [
       "Fitness enthusiast",
       "Milk lover",
       "Health-conscious",
+      "Athlete",
     ],
   },
   {

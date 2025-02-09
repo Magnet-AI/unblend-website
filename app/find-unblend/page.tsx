@@ -29,7 +29,7 @@ export default function FindUnBlendPage() {
   const [hoveredCity, setHoveredCity] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-unblend-blue/20 via-white to-unblend-blue/20">
+    <div className="min-h-screen bg-gradient-to-br from-unblend-blue/20 via-white to-unblend-blue/20 overflow-hidden">
       <Navbar />
       <main className="container mx-auto px-16 py-32">
         <motion.h1

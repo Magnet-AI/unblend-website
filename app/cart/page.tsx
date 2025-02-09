@@ -1,23 +1,25 @@
-"use client"
+"use client";
 
-import { useCart } from "@/context/cart-context"
-import { Button } from "@/components/ui/button"
-import { Minus, Plus, Trash2 } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { useCart } from "@/context/cart-context";
+import { Button } from "@/components/ui/button";
+import { Minus, Plus, Trash2 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function CartPage() {
-  const { state, removeItem, updateQuantity } = useCart()
+  const { state, removeItem, updateQuantity } = useCart();
 
   if (state.items.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-yellow-100 pt-24">
+      <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-yellow-100 pt-24 overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h1 className="text-3xl font-gilroy font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-600 bg-clip-text text-transparent">
               Your Cart is Empty
             </h1>
-            <p className="text-gray-600 mb-8">Start adding some delicious dairy products to your cart!</p>
+            <p className="text-gray-600 mb-8">
+              Start adding some delicious dairy products to your cart!
+            </p>
             <Link href="/products">
               <Button className="bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 hover:from-purple-600 hover:via-pink-600 hover:to-yellow-600 text-white font-gilroy text-lg py-6 px-8 rounded-2xl transition-all duration-300 ease-in-out transform hover:scale-105">
                 Browse Products
@@ -26,7 +28,7 @@ export default function CartPage() {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -38,7 +40,10 @@ export default function CartPage() {
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-4">
             {state.items.map((item) => (
-              <div key={item.id} className="bg-white rounded-2xl p-6 shadow-sm flex items-center gap-4">
+              <div
+                key={item.id}
+                className="bg-white rounded-2xl p-6 shadow-sm flex items-center gap-4"
+              >
                 <div className="relative w-24 h-24 flex-shrink-0">
                   <Image
                     src={item.image || "/placeholder.svg"}
@@ -48,14 +53,18 @@ export default function CartPage() {
                   />
                 </div>
                 <div className="flex-grow">
-                  <h3 className="font-gilroy text-lg font-bold text-gray-800">{item.name}</h3>
+                  <h3 className="font-gilroy text-lg font-bold text-gray-800">
+                    {item.name}
+                  </h3>
                   <p className="text-gray-600">{item.price}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                    onClick={() =>
+                      updateQuantity(item.id, Math.max(0, item.quantity - 1))
+                    }
                     className="h-8 w-8"
                   >
                     <Minus className="h-4 w-4" />
@@ -83,7 +92,9 @@ export default function CartPage() {
           </div>
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl p-6 shadow-sm sticky top-24">
-              <h2 className="font-gilroy text-xl font-bold mb-4">Order Summary</h2>
+              <h2 className="font-gilroy text-xl font-bold mb-4">
+                Order Summary
+              </h2>
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal</span>
@@ -108,6 +119,5 @@ export default function CartPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

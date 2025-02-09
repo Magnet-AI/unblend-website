@@ -86,7 +86,7 @@ const products = [
     features: [
       { label: "PROTEIN", value: "24g" },
       { label: "FLAVOR", value: "RICH" },
-      { label: "CALCIUM", value: "HIGH" },
+      { label: "SUGAR", value: "5g" },
     ],
     color: "chocolate",
     servingSize: "400ml",
@@ -118,7 +118,7 @@ const getColorClasses = (color: string) => {
 
 export default function ProductsPage() {
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
+    <div className="min-h-screen bg-white overflow-hidden">
       <Navbar />
 
       {products.map((product, index) => (
@@ -186,7 +186,7 @@ export default function ProductsPage() {
                       : "ULTRA-FILTERED MILK"}
                   </h2>
                   <h1
-                    className={`text-4xl lg:text-6xl font-light mb-6 text-white ${quicksand.className}`}
+                    className={`text-4xl lg:sm:text-6xl text-5xl font-light mb-6 text-white ${quicksand.className}`}
                   >
                     {product.name}
                   </h1>
@@ -204,7 +204,7 @@ export default function ProductsPage() {
                 >
                   {product.features.map((feature, idx) => (
                     <div key={idx} className="text-center">
-                      <div className="text-5xl lg:text-6xl font-bold mb-2 text-white">
+                      <div className="text-5xl lg:sm:text-6xl text-5xl font-bold mb-2 text-white">
                         {feature.value}
                       </div>
                       <div className="text-sm lg:text-base font-semibold text-white/90">

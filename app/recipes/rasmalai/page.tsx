@@ -49,7 +49,7 @@ const recipe = {
 
 export default function RasmalaiPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-unblend-blue/20 via-white to-unblend-blue/20">
+    <div className="min-h-screen bg-gradient-to-br from-unblend-blue/20 via-white to-unblend-blue/20 overflow-hidden">
       <Navbar />
       <main className="container mx-auto px-4 py-24">
         <h1 className="text-4xl md:text-5xl font-bold text-center text-unblend-navy mb-8">

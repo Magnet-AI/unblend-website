@@ -10,7 +10,7 @@ import { Dumbbell, Heart, Leaf, Droplet } from "lucide-react";
 
 export default function StandardizedMilkPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-white overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-white overflow-hidden">
       <Navbar />
       <main className="container mx-auto px-4 py-32">
         <motion.div
@@ -152,12 +152,12 @@ export default function StandardizedMilkPage() {
           </p>
           <div className="flex justify-center gap-4">
             <Link href="/products">
-              <Button className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-full text-lg">
+              <Button className="bg-orange-600 hover:bg-orange-700 text-white sm:px-8 py-3 rounded-full text-lg">
                 Back to All Products
               </Button>
             </Link>
             <Link href="/find-unblend">
-              <Button className="bg-white text-orange-600 border-2 border-orange-600 hover:bg-orange-50 px-8 py-3 rounded-full text-lg">
+              <Button className="bg-white text-orange-600 border-2 border-orange-600 hover:bg-orange-50 sm:px-8 py-3 rounded-full text-lg">
                 Find Near You
               </Button>
             </Link>

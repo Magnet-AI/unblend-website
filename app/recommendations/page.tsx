@@ -168,7 +168,13 @@ function calculateScore(answers: (string | string[])[]): {
     }
   });
 
-  return { proteinScore, fatScore, sugarScore, isFitnessEnthusiast, isHealthConscious };
+  return {
+    proteinScore,
+    fatScore,
+    sugarScore,
+    isFitnessEnthusiast,
+    isHealthConscious,
+  };
 }
 
 // ----------------------------------------
@@ -181,7 +187,13 @@ function getRecommendedProducts(scores: {
   isFitnessEnthusiast: boolean;
   isHealthConscious: boolean;
 }): Product[] {
-  const { proteinScore, fatScore, sugarScore, isFitnessEnthusiast, isHealthConscious } = scores;
+  const {
+    proteinScore,
+    fatScore,
+    sugarScore,
+    isFitnessEnthusiast,
+    isHealthConscious,
+  } = scores;
 
   // Filter out the protein shake for the initial sorting
   const sortedMilkProducts = products
@@ -206,7 +218,9 @@ function getRecommendedProducts(scores: {
   // Decide if we should add protein shake or the 3rd best milk
   if (isFitnessEnthusiast || isHealthConscious || proteinScore > 3) {
     // Add the protein shake as a recommendation
-    const proteinShake = products.find((p) => p.id === "chocolate-protein-milkshake");
+    const proteinShake = products.find(
+      (p) => p.id === "chocolate-protein-milkshake"
+    );
     if (proteinShake) {
       recommendations.push(proteinShake);
     }
@@ -259,7 +273,10 @@ export default function RecommendationsPage() {
   const searchParams = useSearchParams();
 
   // Safely get the 'answers' param from the URL
-  const answersParam = useMemo(() => searchParams.get("answers"), [searchParams]);
+  const answersParam = useMemo(
+    () => searchParams.get("answers"),
+    [searchParams]
+  );
 
   // Parse and compute recommendations if answersParam exists
   useEffect(() => {
@@ -299,11 +316,10 @@ export default function RecommendationsPage() {
 
   // If we have recommendations, show them
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-hidden">
       <Navbar />
       <div className="bg-gradient-to-br from-unblend-blue via-unblend-navy to-purple-600">
         <div className="py-32 px-4 md:px-8 max-w-7xl mx-auto">
-
           <motion.div
             className="text-center text-white mb-12"
             initial={{ opacity: 0, y: 20 }}

@@ -68,7 +68,7 @@ export function Features() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-6xl font-bold text-unblend-navy mb-6">
+          <h2 className="sm:text-6xl text-5xl font-bold text-unblend-navy mb-6">
             Why Choose UnBlend?
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">

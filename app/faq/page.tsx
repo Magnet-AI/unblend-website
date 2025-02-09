@@ -30,7 +30,7 @@ const faqs = [
   {
     question: "Are UnBlend products organic?",
     answer:
-      "While we prioritize high-quality ingredients and sustainable farming practices, not all UnBlend products are certified organic. We do offer an organic line, which is clearly labeled on the packaging.",
+      "While we prioritize high-quality ingredients and sustainable farming practices, our products are natural but not certified organic. We focus on delivering the best possible nutrition through our innovative ultra-filtration process, ensuring that every UnBlend product is of the highest quality and packed with essential nutrients.",
   },
   {
     question: "How does ultra-filtration work?",
@@ -81,7 +81,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
 export default function FAQPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-hidden">
       <Navbar />
       <main className="container mx-auto px-4 py-32">
         <motion.h1
