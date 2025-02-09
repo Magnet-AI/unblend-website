@@ -10,7 +10,7 @@ import { Feather, Heart, Zap, Leaf } from "lucide-react";
 
 export default function TonedMilkPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white overflow-hidden">
       <Navbar />
       <main className="container mx-auto px-4 py-32">
         <motion.div
@@ -28,13 +28,13 @@ export default function TonedMilkPage() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16 pb-10">
+        <div className="grid md:grid-cols-2 gap-12 items-center md:mb-16 md:pt-6 pb-10">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="relative h-[500px] rounded-2xl scale-150">
+            <div className="relative h-[500px] rounded-2xl md:scale-150 scale-125 mb-20 md:mb-0">
               <Image
                 src="../toned_milk.png"
                 alt="Toned Ultra-filtered Milk"
@@ -152,12 +152,12 @@ export default function TonedMilkPage() {
           </p>
           <div className="flex justify-center gap-4">
             <Link href="/products">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white sm:px-8 py-3 rounded-full text-lg">
                 Back to All Products
               </Button>
             </Link>
             <Link href="/find-unblend">
-              <Button className="bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50 px-8 py-3 rounded-full text-lg">
+              <Button className="bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50 sm:px-8 py-3 rounded-full text-lg">
                 Find Near You
               </Button>
             </Link>

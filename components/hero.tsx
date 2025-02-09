@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Activity, Clock, Leaf, StickerIcon as Stomach } from "lucide-react";
 import Link from "next/link";
 import { Quicksand } from "next/font/google";
 
@@ -32,17 +31,17 @@ export function Hero() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-white via-sky-200 to-white overflow-hidden">
-      <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
+      <div className="container mx-auto px-4 m:py-16 py-32 relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid lg:grid-cols-2 gap-8 items-center"
+          className="grid lg:grid-cols-2 md:gap-8 items-center"
         >
-          <div className="text-unblend-navy space-y-8">
+          <div className="text-unblend-navy space-y-6 sm:space-y-8">
             <motion.div variants={itemVariants} className="space-y-4">
               <h1
-                className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-2 mt-6 ${quicksand.className}`}
+                className={`text-3xl sm:text-4xl md:text-5xl lg:sm:text-6xl text-5xl font-bold leading-tight ${quicksand.className}`}
               >
                 <span className="text-unblend-navy">
                   More
@@ -50,26 +49,27 @@ export function Hero() {
                   Protein.
                 </span>
                 <br />
-                <span className="text-unblend-navy  font-normal">
+                <span className="text-unblend-navy font-normal">
                   Better
                   <br />
                   Taste.
                 </span>
               </h1>
               <p
-                className={`text-xl font-bold text-unblend-navy pb-5 rounded-lg inline-block ${quicksand.className}`}
+                className={`text-lg sm:text-xl font-bold text-unblend-navy pb-2 sm:pb-5 rounded-lg inline-block ${quicksand.className}`}
               >
                 Experience the perfect blend of health, taste, and convenience.
               </p>
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <Link href="/products">
+              <Link href="/quiz">
                 <Button
                   size="lg"
-                  className="bg-unblend-navy hover:bg-unblend-navy/90 text-white text-lg px-8 py-6 rounded-full shadow-lg transition-all duration-300 hover:scale-105"
+                  className="bg-unblend-navy hover:bg-unblend-navy/90 text-white text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 sm:py-4 md:py-6 rounded-full shadow-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                 >
-                  Explore Our Products
+                  Find Your Perfect Milk! 🥛✨
+                  <span className="hidden sm:inline"> Take the Quiz Now →</span>
                 </Button>
               </Link>
             </motion.div>
@@ -77,16 +77,10 @@ export function Hero() {
 
           <motion.div
             variants={containerVariants}
-            className="relative w-full aspect-square max-w-2xl mx-auto"
+            className="relative w-full aspect-square max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto mt-8 lg:mt-0"
           >
-            <div className="grid grid-cols-2 grid-rows-2 gap-7 w-full h-full">
+            <div className="grid grid-cols-2 grid-rows-2 gap-3 sm:gap-5 md:gap-7 w-full h-full">
               {[
-                {
-                  color: "chocolate",
-                  image:
-                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora%20(7)-R9Q1AODjOKu7D1ikL0vSJ9w0d5wsOS.png",
-                  id: "chocolate-protein-milkshake",
-                },
                 {
                   color: "standarized",
                   image:
@@ -105,7 +99,13 @@ export function Hero() {
                     "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora%20(1)-LX9Ati1OeZWcUjdshqQFel0VhR1gVF.png",
                   id: "toned-milk",
                 },
-              ].map((bottle, index) => (
+                {
+                  color: "chocolate",
+                  image:
+                    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora%20(7)-R9Q1AODjOKu7D1ikL0vSJ9w0d5wsOS.png",
+                  id: "chocolate-protein-milkshake",
+                },
+              ].map((bottle) => (
                 <motion.div
                   key={bottle.color}
                   variants={itemVariants}
@@ -113,14 +113,14 @@ export function Hero() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="relative mt-10 w-full h-full rounded-2xl overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-300 cursor-pointer">
+                  <div className="relative mt-4 sm:mt-6 md:mt-10 w-full h-full rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-md sm:shadow-lg group-hover:shadow-xl transition-all duration-300 cursor-pointer">
                     <Link href={`/products/${bottle.id}`} passHref>
                       <Image
                         src={bottle.image || "/placeholder.svg"}
                         alt={`UnBlend ${bottle.color} milk`}
                         layout="fill"
                         objectFit="cover"
-                        className="transition-transform duration-300 scale-125 group-hover:scale-150"
+                        className="transition-transform duration-300 scale-110 sm:scale-125 group-hover:scale-150"
                       />
                     </Link>
                   </div>
@@ -140,6 +140,7 @@ export function Hero() {
           viewBox="0 0 1440 320"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-auto"
         >
           <path
             fill="#FFFFFF"

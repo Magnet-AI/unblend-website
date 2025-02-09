@@ -48,7 +48,7 @@ export default function AboutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-sky-200 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-white via-sky-200 to-white overflow-hidden">
       <Navbar />
 
       {/* Hero Section */}
@@ -60,7 +60,7 @@ export default function AboutPage() {
             transition={{ duration: 0.5 }}
             className="text-center max-w-4xl mx-auto mb-16"
           >
-            <h1 className="text-6xl font-bold mb-6">About Us</h1>
+            <h1 className="sm:text-6xl text-5xl font-bold mb-6">About Us</h1>
             <p className="text-xl text-unblend-navy/80">
               Innovating milk for better quality, taste, & nutrition.
             </p>

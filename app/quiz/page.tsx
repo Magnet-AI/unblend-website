@@ -96,7 +96,7 @@ export default function QuizPage() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-unblend-blue via-unblend-navy to-purple-600 py-12 flex flex-col justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-unblend-blue via-unblend-navy to-purple-600 py-12 flex flex-col justify-center overflow-hidden">
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-2xl mx-auto mt-8">
             <motion.div

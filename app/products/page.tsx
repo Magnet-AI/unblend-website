@@ -12,28 +12,6 @@ const quicksand = Quicksand({ subsets: ["latin"] });
 
 const products = [
   {
-    id: "chocolate-protein-milkshake",
-    name: "Protein Shake",
-    description:
-      "Your everyday protein boost—24g of natural goodness when your diet needs a lift.",
-    image: "./two_protein_shake.png",
-    features: [
-      { label: "PROTEIN", value: "24g" },
-      { label: "FLAVOR", value: "RICH" },
-      { label: "CALCIUM", value: "HIGH" },
-    ],
-    color: "chocolate",
-    servingSize: "400ml",
-    nutritionInfo: {
-      totalFat: "5g",
-      saturatedFat: "3g",
-      carbohydrates: "6g",
-      sugar: "5g",
-      protein: "24g",
-      lactoseFree: "Yes",
-    },
-  },
-  {
     id: "standardized-milk",
     name: "Standardized Milk",
     description:
@@ -99,6 +77,28 @@ const products = [
       lactoseFree: "Yes",
     },
   },
+  {
+    id: "chocolate-protein-milkshake",
+    name: "Protein Shake",
+    description:
+      "Your everyday protein boost—24g of natural goodness when your diet needs a lift.",
+    image: "./two_protein_shake.png",
+    features: [
+      { label: "PROTEIN", value: "24g" },
+      { label: "FLAVOR", value: "RICH" },
+      { label: "SUGAR", value: "5g" },
+    ],
+    color: "chocolate",
+    servingSize: "400ml",
+    nutritionInfo: {
+      totalFat: "5g",
+      saturatedFat: "3g",
+      carbohydrates: "6g",
+      sugar: "5g",
+      protein: "24g",
+      lactoseFree: "Yes",
+    },
+  },
 ];
 
 const getColorClasses = (color: string) => {
@@ -118,7 +118,7 @@ const getColorClasses = (color: string) => {
 
 export default function ProductsPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-hidden">
       <Navbar />
 
       {products.map((product, index) => (
@@ -186,7 +186,7 @@ export default function ProductsPage() {
                       : "ULTRA-FILTERED MILK"}
                   </h2>
                   <h1
-                    className={`text-4xl lg:text-6xl font-light mb-6 text-white ${quicksand.className}`}
+                    className={`text-4xl lg:sm:text-6xl text-5xl font-light mb-6 text-white ${quicksand.className}`}
                   >
                     {product.name}
                   </h1>
@@ -204,7 +204,7 @@ export default function ProductsPage() {
                 >
                   {product.features.map((feature, idx) => (
                     <div key={idx} className="text-center">
-                      <div className="text-5xl lg:text-6xl font-bold mb-2 text-white">
+                      <div className="text-5xl lg:sm:text-6xl text-5xl font-bold mb-2 text-white">
                         {feature.value}
                       </div>
                       <div className="text-sm lg:text-base font-semibold text-white/90">

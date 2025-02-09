@@ -5,10 +5,10 @@ export const quizQuestions = [
     options: [
       "Myself",
       "Parents",
-      "Friend",
+      "Friends",
       "Grandparents",
-      "Colleagues",
-      "My love",
+      "Kids",
+      "Partner",
       "Other",
     ],
   },
@@ -29,7 +29,8 @@ export const quizQuestions = [
     ],
   },
   {
-    question: "4. Any health symptoms as follows:",
+    question:
+      "4. Do you face any of the following health symptomps (Pick all that apply)?",
     type: "multiple",
     options: [
       "Diabetics",
@@ -43,18 +44,18 @@ export const quizQuestions = [
     ],
   },
   {
-    question: "5. Any of these dairy dilemmas? (Pick all that apply)",
+    question: "5. What are you looking for in your diet (Pick all that apply)?",
     type: "multiple",
     options: [
       "Watching calories",
       "Need more protein",
       "Want less sugar",
+      "Essential calcium, vitamin, & minerals",
       "None of these",
     ],
   },
   {
-    question:
-      "6. Amount of milk consumed per day: in every day of life. (Baking, shakes, coffee, tea etc.)",
+    question: "6. How much milk do you consume per day?",
     type: "single",
     options: ["1 cup", "2 cups", "3 cups", "4+ cups"],
   },
