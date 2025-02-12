@@ -69,17 +69,26 @@ export function Footer() {
                   href="/find-unblend"
                   className="text-unblend-navy hover:text-unblend-blue transition-colors duration-300 ease-in-out"
                 >
-                  Contact
+                  Find Us
                 </Link>
               </li>
             </ul>
           </motion.div>
-          <motion.div variants={itemVariants}>
-            <h4 className="font-semibold mb-4">Contact</h4>
+          <motion.div variants={itemVariants} className="space-y-4">
+            <h4 className="font-semibold text-lg text-unblend-navy">Contact</h4>
             <ul className="space-y-2 text-unblend-navy">
-              <li>Email: unblendinfo@gmail.com</li>
-              <li>Phone: +91 7397751781</li>
-              <li>Address: Coimbatore, India</li>
+              <li className="flex items-center justify-between border-b border-gray-300 pb-2">
+                <span className="font-medium">Email:</span>
+                <span className="font-bold text-right">info@unblend.in</span>
+              </li>
+              <li className="flex items-center justify-between border-b border-gray-300 pb-2">
+                <span className="font-medium">Phone:</span>
+                <span className="font-bold text-right">+91 7397751781</span>
+              </li>
+              <li className="flex items-center justify-between">
+                <span className="font-medium">Address:</span>
+                <span className="font-bold text-right">Coimbatore, India</span>
+              </li>
             </ul>
           </motion.div>
           <motion.div variants={itemVariants}>
