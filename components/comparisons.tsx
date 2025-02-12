@@ -5,10 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function Comparisons() {
+const colorClasses = {
+  green: "from-green-600 to-green-700",
+  orange: "from-orange-600 to-orange-700",
+  blue: "from-blue-600 to-blue-700",
+};
+
+export function Comparisons({ color, protein }) {
   return (
-    <div className="bg-white">
-      <section className="py-12 px-4 sm:px-6 lg:px-8">
+    <div>
+      <section className="py-32 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -16,7 +22,9 @@ export function Comparisons() {
             transition={{ duration: 0.5 }}
             className="mb-8"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-unblend-navy text-center mb-4">
+            <h2
+              className={`text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 text-${color}-600`}
+            >
               Compare the Difference
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-gray-600 text-center mb-8 max-w-2xl mx-auto">
@@ -30,26 +38,26 @@ export function Comparisons() {
               {
                 title: "UnBlend Ultra-filtered Milk",
                 description: "The perfect blend of nutrition and taste",
-                color: "from-blue-600 to-unblend-navy",
-                values: ["12g", "No"],
-                labels: ["PROTEIN", "LACTOSE"],
+                color: colorClasses[color],
+                values: ["Low", protein, "No"],
+                labels: ["SUGAR", "PROTEIN", "LACTOSE"],
                 icon: "🥛",
               },
               {
                 title: "Regular Milk",
                 description: "Traditional dairy option",
-                color: "from-amber-500 to-amber-600",
-                values: ["6g", "Yes"],
-                labels: ["PROTEIN", "LACTOSE"],
+                color: "from-cyan-500 to-cyan-600",
+                values: ["High", "6g", "Yes"],
+                labels: ["SUGAR", "PROTEIN", "LACTOSE"],
                 icon: "🐄",
               },
               {
                 title: "Almond Milk",
                 description: "Plant-based alternative",
-                color: "from-emerald-500 to-emerald-600",
-                values: ["1g", "No"],
-                labels: ["PROTEIN", "LACTOSE"],
-                icon: "./almond.png",
+                color: "from-orange-900 to-amber-900",
+                values: ["Low", "1g", "No"],
+                labels: ["SUGAR", "PROTEIN", "LACTOSE"],
+                icon: "/almond.png",
               },
             ].map((item, index) => (
               <motion.div
@@ -125,7 +133,9 @@ export function Comparisons() {
                 variant
               </p>
               <Link href="/products" className="inline-block">
-                <Button className="bg-unblend-navy hover:bg-unblend-navy/90 text-white px-4 py-2 rounded-full transition-all duration-300 hover:shadow-lg text-xs sm:text-sm">
+                <Button
+                  className={`bg-${color}-600 hover:bg-${color}-700 text-white px-4 py-2 rounded-full transition-all duration-300 hover:shadow-lg text-xs sm:text-sm`}
+                >
                   Discover UnBlend Products
                 </Button>
               </Link>

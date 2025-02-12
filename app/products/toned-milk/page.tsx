@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Feather, Heart, Zap, Leaf } from "lucide-react";
+import { Comparisons } from "@/components/comparisons";
 
 export default function TonedMilkPage() {
   return (
@@ -101,7 +102,7 @@ export default function TonedMilkPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="relative z-10 bg-blue-50 rounded-2xl p-16 mb-16"
+          className="relative z-10 bg-blue-50 rounded-2xl p-16"
         >
           <h2 className="text-3xl font-bold text-blue-600 mb-6 text-center">
             Nutrition Facts
@@ -136,6 +137,8 @@ export default function TonedMilkPage() {
             </div>
           </div>
         </motion.div>
+
+        <Comparisons color="blue" protein="12g" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
