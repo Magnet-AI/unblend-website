@@ -98,11 +98,13 @@ export default function StandardizedMilkPage() {
           </motion.div>
         </div>
 
+        <Comparisons color="orange" protein="12g" />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="relative z-10 bg-orange-50 rounded-2xl p-16"
+          className="relative z-10 bg-orange-50 rounded-2xl p-16 mb-24"
         >
           <h2 className="text-3xl font-bold text-orange-600 mb-6 text-center">
             Nutrition Facts
@@ -137,8 +139,6 @@ export default function StandardizedMilkPage() {
             </div>
           </div>
         </motion.div>
-
-        <Comparisons color="orange" protein="12g" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

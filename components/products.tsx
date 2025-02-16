@@ -24,7 +24,7 @@ const products = [
     bestUse: "Perfect for daily nutrition and active lifestyles",
   },
   {
-    id: "unblend-chocolate-protein-shake",
+    id: "unblend-chocolate-protein-milkshake",
     name: "UnBlend Chocolate Protein Shake",
     description:
       "High protein shake with 24g protein, made only from natural ingredients",

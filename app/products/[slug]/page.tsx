@@ -1,7 +1,7 @@
-import { notFound } from "next/navigation"
-import Image from "next/image"
-import { AddToCartButton } from "@/components/add-to-cart-button"
-import Link from "next/link"
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import { AddToCartButton } from "@/components/add-to-cart-button";
+import Link from "next/link";
 
 // This would typically come from a database or API
 const products = [
@@ -24,9 +24,10 @@ const products = [
     },
   },
   {
-    slug: "unblend-chocolate-protein-shake",
+    slug: "unblend-chocolate-protein-milkshake",
     name: "UnBlend Chocolate Protein Shake",
-    description: "High protein shake with 24g protein, made only from natural ingredients.",
+    description:
+      "High protein shake with 24g protein, made only from natural ingredients.",
     longDescription:
       "Indulge in the rich, chocolatey goodness of UnBlend's Chocolate Protein Shake while fueling your body with 24g of high-quality protein. Perfect for post-workout recovery or as a nutritious meal replacement, this shake is crafted with natural ingredients to support your active lifestyle without compromising on taste.",
     price: "₹175",
@@ -41,13 +42,13 @@ const products = [
       fat: "3g",
     },
   },
-]
+];
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
-  const product = products.find((p) => p.slug === params.slug)
+  const product = products.find((p) => p.slug === params.slug);
 
   if (!product) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -83,8 +84,12 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               />
             </div>
             <div className="space-y-6">
-              <h1 className="text-4xl font-gilroy font-bold text-gray-900">{product.name}</h1>
-              <p className="text-2xl font-semibold text-purple-600">{product.price}</p>
+              <h1 className="text-4xl font-gilroy font-bold text-gray-900">
+                {product.name}
+              </h1>
+              <p className="text-2xl font-semibold text-purple-600">
+                {product.price}
+              </p>
               <p className="text-gray-600">{product.longDescription}</p>
               <div className="flex flex-wrap gap-2">
                 {product.features.map((feature) => (
@@ -97,22 +102,39 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 ))}
               </div>
               <AddToCartButton
-                product={{ id: product.slug, name: product.name, price: product.price, image: product.image }}
+                product={{
+                  id: product.slug,
+                  name: product.name,
+                  price: product.price,
+                  image: product.image,
+                }}
               />
               <div className="mt-8">
-                <h2 className="text-2xl font-gilroy font-bold text-gray-900 mb-4">Nutrition Facts</h2>
+                <h2 className="text-2xl font-gilroy font-bold text-gray-900 mb-4">
+                  Nutrition Facts
+                </h2>
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-gray-600">Serving Size</div>
-                    <div className="font-semibold">{product.nutritionFacts.servingSize}</div>
+                    <div className="font-semibold">
+                      {product.nutritionFacts.servingSize}
+                    </div>
                     <div className="text-gray-600">Calories</div>
-                    <div className="font-semibold">{product.nutritionFacts.calories}</div>
+                    <div className="font-semibold">
+                      {product.nutritionFacts.calories}
+                    </div>
                     <div className="text-gray-600">Protein</div>
-                    <div className="font-semibold">{product.nutritionFacts.protein}</div>
+                    <div className="font-semibold">
+                      {product.nutritionFacts.protein}
+                    </div>
                     <div className="text-gray-600">Carbohydrates</div>
-                    <div className="font-semibold">{product.nutritionFacts.carbs}</div>
+                    <div className="font-semibold">
+                      {product.nutritionFacts.carbs}
+                    </div>
                     <div className="text-gray-600">Fat</div>
-                    <div className="font-semibold">{product.nutritionFacts.fat}</div>
+                    <div className="font-semibold">
+                      {product.nutritionFacts.fat}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -121,6 +143,5 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

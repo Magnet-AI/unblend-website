@@ -35,11 +35,67 @@ const stories = [
   },
 ];
 
+const StoryCard = ({ story, index, isExpanded, onToggle }) => {
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={
+        isExpanded ? { duration: 0.5, delay: index * 0.1 } : { duration: 0 }
+      }
+      className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden flex flex-col"
+    >
+      <div className="relative h-64 w-full">
+        <Image
+          src={story.image || "/placeholder.svg"}
+          alt={story.title}
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="p-6 flex-grow flex flex-col">
+        <h3 className="text-2xl font-bold text-unblend-navy mb-2">
+          {story.title}
+        </h3>
+        <p className="text-sm text-gray-600 mb-4">{story.description}</p>
+        <motion.div
+          key={isExpanded ? "expanded" : "collapsed"}
+          initial="collapsed"
+          animate={isExpanded ? "expanded" : "collapsed"}
+          exit="collapsed"
+          variants={{
+            expanded: { opacity: 1, height: "auto" },
+            collapsed: { opacity: 1, height: "6rem" },
+          }}
+          transition={{ duration: 0.3 }}
+          className="relative flex-grow overflow-hidden"
+        >
+          <div className="text-gray-700 leading-relaxed">{story.content}</div>
+          {!isExpanded && (
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
+          )}
+        </motion.div>
+        <button
+          className="mt-4 text-unblend-navy hover:text-unblend-blue transition-colors self-start focus:outline-none focus:ring-2 focus:ring-unblend-blue focus:ring-opacity-50 rounded"
+          onClick={onToggle}
+        >
+          {isExpanded ? "Read less" : "Read more"}
+        </button>
+      </div>
+    </motion.div>
+  );
+};
+
 export function StoriesOfIndia() {
-  const [expanded, setExpanded] = useState(null);
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  const toggleExpand = (index: number) => {
+    setExpanded(expanded === index ? null : index);
+  };
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-gradient-to-br from-unblend-blue/5 via-white to-unblend-blue/5">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,41 +113,13 @@ export function StoriesOfIndia() {
         </motion.div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
           {stories.map((story, index) => (
-            <motion.div
+            <StoryCard
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden flex flex-col h-full"
-            >
-              <div className="relative h-64 w-full">
-                <Image
-                  src={story.image || "/placeholder.svg"}
-                  alt={story.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-6 flex-grow flex flex-col">
-                <h3 className="text-2xl font-bold text-unblend-navy mb-2">
-                  {story.title}
-                </h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  {story.description}
-                </p>
-                <p className="text-gray-700 leading-relaxed flex-grow">
-                  {expanded === index
-                    ? story.content
-                    : story.content.slice(0, 120) + "..."}
-                </p>
-                <button
-                  className="mt-4 text-unblend-blue hover:text-unblend-navy transition-colors self-start"
-                  onClick={() => setExpanded(expanded === index ? null : index)}
-                >
-                  {expanded === index ? "Read less" : "Read more"}
-                </button>
-              </div>
-            </motion.div>
+              story={story}
+              index={index}
+              isExpanded={expanded === index}
+              onToggle={() => toggleExpand(index)}
+            />
           ))}
         </div>
       </div>

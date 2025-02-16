@@ -48,7 +48,7 @@ const features = [
   },
   {
     title: "100% Natural",
-    description: "No artificial additives—just pure, wholesome ingredients",
+    description: "No artificial additives—just pure, wholesome milk",
     stats: "Only natural ingredients",
     icons: [(props) => <Sprout {...props} />, (props) => <Shield {...props} />],
     color: "text-green-600",

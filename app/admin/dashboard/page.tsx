@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -6,12 +6,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { BarChart2, Settings } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Users,
   Package,
@@ -42,11 +37,11 @@ import { quizQuestions } from "@/data/quiz-questions";
 const AWS_ACCESS_KEY_ID = "AKIAZI2LD5" + "HLWGVKHV4F";
 const AWS_SECRET_ACCESS_KEY = "whQfTzu6YcxNWviMXYy" + "NArZLQh3Nf/by9IAkGAcL";
 const AWS_REGION = "us-west-1";
-const NEXT_PUBLIC_GA_PROPERTY_ID = "477964090" 
-const NEXT_PUBLIC_GA_CLIENT_EMAIL= "starting-account-edvw8gdbgxzy@unblend-admin-1739434329356.iam.gserviceaccount.com"
-const NEXT_PUBLIC_GA_PRIVATE_KEY= "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDLOiX/HPC3C5P5\nlDmn0fBMwCdha04gv6dZfv8iaEovNOVGJ0lOcv+PDzicL2DDxcBC/RboGIEm49YH\nTXuhDcn3yvKItlBQ4Gh+yOyIkmIszI0QtyE6LoGijsujCEjotTEm78tELO8vOPPD\nC8mDf6yLrbZvxNDL2MTVGNFs5nTb5otgIQDMlTDPvCz7yn7RVOP3WGM4qs/OJqrx\nejiAgywR5IGkfabOpaD/00ekUXOYNzTWFosjXn4H0T7aEGMBCdY6lHrV6KGyMhk+\nl/4YdOGfJd+R3ruw84apJpqu9PEdNmbpMloc5nMfr/28xecHy+4CBYEh61oExM2Z\nOgm2rUzLAgMBAAECggEACSwwttkJjFl7blJgX9C79drebCk5t4Su+v0eauEmKAdN\nKeNwDZhnLH/VYEdLKMruKJffxs4EVksGSAIZSGWk7gg89iq0aVIXpVFQS8G/qKH6\n4/xABa4/r6SeUFd5Yvd6pnVASW11xj3d0rnfeI30rcFDcLwDaI/6IlwiZ7XnJF2o\n46QfzgX9cYBzbbwlgNGUcyCWwe8QgvJ7w5cNWahG5w++ayxL3hyc2gvpIMZ1HLyn\nZEOkYFnkUESYFK0yoXRL110dPDonu6PM+Dv2hkkFXtDeb8Lq5F6YCC6iZWwey7jy\n8qHkLkt3Tr2cPeYFL0rSurFH/qUQIhAeAnoMkLFIEQKBgQDvTSA0RWOCGzLBgCuQ\nT2qJaosHk1E0wOFQXS2Wl2e4WgwJYOUltdTOIftAn/cIzSC9l2PeYEa2BL1NRZJ6\n/2SbVyK0Qs9k+MnbPRQ0MY41N52Fm42V6xZGvNbnzNJ3qa+bcg6IFqvcpo9oMNs2\nRx471JBfbHuLryNeu0mdt8xgTwKBgQDZaJhM8rNfeVlkt1+ljZeBx7xnt4o0lOMm\neQ24LYKQrnFaaclmD0ETXz/Hm1LPmfNRQj5NkC5mB3/r7mNPdTB0jow048+tbGwr\np8YENjcwqMROIzQDCyUMGh9bS4BxgLQWGnbVTAPAsG/GOjIVNE1IdieHJVWaIxER\n3cLPHKnQxQKBgQDQMt8Q+0n/OaCoP9YnISFE24CIn8BoUGP34om2WpYwC5ArXLUh\nYRj8Gw6ZhFOOwcF5kkyefk8nL+pvX1d5Udh7Wo1kHjiI1ffxmiuI2ZCrdm7Dfrnp\ntHZWJxgm5so6uFSDvvErr+Xo/LUKZm9iwu9oCKFvlFfNCRyR4ArFgNL8+wKBgQDJ\nLURhT+Qz4LKbxCO5qkAcU5s/zlMRPQTEwRe06kf7YbB6nZFD47GwH1+BcXU7rZW+\nB7JnS5fjyeTRiRJUoHhqIs4S0wuFyuJ9sw5FL3X6jPC57VFfz5xEipehf0gnv5Tl\nLy/vSBvg3mNP5uIZRQCOoOcK471GmFRfV/nAdSGekQKBgQC0Ic6EWDOi0arHUMcj\ng9sd3nZOgyRPBasyavASdk/pWU/pheQIulegdAyzi9frYd1g+79OkgBvQW2nFFta\nO6lFASzYysfgaKwAHM4lw9MylUapCpeRlRDsqkLdHXZdv7iM5kw+yuzxLpu0aTYQ\nUCKKvBim3NrJe72yXK/L26619Q==\n-----END PRIVATE KEY-----\n"
-
-
+const NEXT_PUBLIC_GA_PROPERTY_ID = "477964090";
+const NEXT_PUBLIC_GA_CLIENT_EMAIL =
+  "starting-account-edvw8gdbgxzy@unblend-admin-1739434329356.iam.gserviceaccount.com";
+const NEXT_PUBLIC_GA_PRIVATE_KEY =
+  "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDLOiX/HPC3C5P5\nlDmn0fBMwCdha04gv6dZfv8iaEovNOVGJ0lOcv+PDzicL2DDxcBC/RboGIEm49YH\nTXuhDcn3yvKItlBQ4Gh+yOyIkmIszI0QtyE6LoGijsujCEjotTEm78tELO8vOPPD\nC8mDf6yLrbZvxNDL2MTVGNFs5nTb5otgIQDMlTDPvCz7yn7RVOP3WGM4qs/OJqrx\nejiAgywR5IGkfabOpaD/00ekUXOYNzTWFosjXn4H0T7aEGMBCdY6lHrV6KGyMhk+\nl/4YdOGfJd+R3ruw84apJpqu9PEdNmbpMloc5nMfr/28xecHy+4CBYEh61oExM2Z\nOgm2rUzLAgMBAAECggEACSwwttkJjFl7blJgX9C79drebCk5t4Su+v0eauEmKAdN\nKeNwDZhnLH/VYEdLKMruKJffxs4EVksGSAIZSGWk7gg89iq0aVIXpVFQS8G/qKH6\n4/xABa4/r6SeUFd5Yvd6pnVASW11xj3d0rnfeI30rcFDcLwDaI/6IlwiZ7XnJF2o\n46QfzgX9cYBzbbwlgNGUcyCWwe8QgvJ7w5cNWahG5w++ayxL3hyc2gvpIMZ1HLyn\nZEOkYFnkUESYFK0yoXRL110dPDonu6PM+Dv2hkkFXtDeb8Lq5F6YCC6iZWwey7jy\n8qHkLkt3Tr2cPeYFL0rSurFH/qUQIhAeAnoMkLFIEQKBgQDvTSA0RWOCGzLBgCuQ\nT2qJaosHk1E0wOFQXS2Wl2e4WgwJYOUltdTOIftAn/cIzSC9l2PeYEa2BL1NRZJ6\n/2SbVyK0Qs9k+MnbPRQ0MY41N52Fm42V6xZGvNbnzNJ3qa+bcg6IFqvcpo9oMNs2\nRx471JBfbHuLryNeu0mdt8xgTwKBgQDZaJhM8rNfeVlkt1+ljZeBx7xnt4o0lOMm\neQ24LYKQrnFaaclmD0ETXz/Hm1LPmfNRQj5NkC5mB3/r7mNPdTB0jow048+tbGwr\np8YENjcwqMROIzQDCyUMGh9bS4BxgLQWGnbVTAPAsG/GOjIVNE1IdieHJVWaIxER\n3cLPHKnQxQKBgQDQMt8Q+0n/OaCoP9YnISFE24CIn8BoUGP34om2WpYwC5ArXLUh\nYRj8Gw6ZhFOOwcF5kkyefk8nL+pvX1d5Udh7Wo1kHjiI1ffxmiuI2ZCrdm7Dfrnp\ntHZWJxgm5so6uFSDvvErr+Xo/LUKZm9iwu9oCKFvlFfNCRyR4ArFgNL8+wKBgQDJ\nLURhT+Qz4LKbxCO5qkAcU5s/zlMRPQTEwRe06kf7YbB6nZFD47GwH1+BcXU7rZW+\nB7JnS5fjyeTRiRJUoHhqIs4S0wuFyuJ9sw5FL3X6jPC57VFfz5xEipehf0gnv5Tl\nLy/vSBvg3mNP5uIZRQCOoOcK471GmFRfV/nAdSGekQKBgQC0Ic6EWDOi0arHUMcj\ng9sd3nZOgyRPBasyavASdk/pWU/pheQIulegdAyzi9frYd1g+79OkgBvQW2nFFta\nO6lFASzYysfgaKwAHM4lw9MylUapCpeRlRDsqkLdHXZdv7iM5kw+yuzxLpu0aTYQ\nUCKKvBim3NrJe72yXK/L26619Q==\n-----END PRIVATE KEY-----\n";
 
 const dynamoDBClient = new DynamoDBClient({
   region: AWS_REGION,
@@ -61,7 +56,9 @@ async function fetchDynamoDBData() {
   try {
     const command = new ScanCommand({ TableName: "QuizResponses" }); // Replace with your actual table name
     const response = await dynamoDBClient.send(command);
-    const items = response.Items ? response.Items.map((item) => unmarshall(item)) : [];
+    const items = response.Items
+      ? response.Items.map((item) => unmarshall(item))
+      : [];
     return items;
   } catch (error) {
     console.error("Error fetching data from DynamoDB:", error);
@@ -242,10 +239,10 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-joyya-blue/20 via-white to-joyya-blue/20">
+    <div className="min-h-screen bg-gradient-to-br from-unblend-blue/20 via-white to-unblend-blue/20">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-joyya-navy mb-8">
+        <h1 className="text-4xl font-bold text-unblend-navy mb-8">
           Admin Dashboard
         </h1>
         <div className="flex flex-col md:flex-row gap-8">

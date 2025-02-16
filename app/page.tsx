@@ -28,7 +28,6 @@ export default function Home() {
       <Hero />
       <OurStory />
       <Features />
-      <Comparisons />
       <DailyRituals />
       <StoriesOfIndia />
       <QuizModal />
