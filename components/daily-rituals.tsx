@@ -40,7 +40,7 @@ const beverages = [
 
 export function DailyRituals() {
   return (
-    <section className="py-24 bg-gradient-to-br from-unblend-blue/5 via-white to-unblend-blue/5">
+    <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

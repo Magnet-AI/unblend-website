@@ -1,0 +1,261 @@
+"use client";
+
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Quicksand } from "next/font/google";
+
+// Use the Quicksand font for headings
+const quicksand = Quicksand({ subsets: ["latin"] });
+
+// Product data remains the same
+const products = [
+  {
+    id: "toned-milk",
+    name: "Toned Milk",
+    description: "Low-fat milk for health-conscious individuals",
+    image:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora%20(1)-LX9Ati1OeZWcUjdshqQFel0VhR1gVF.png",
+    features: [
+      { label: "PROTEIN", value: "12g" },
+      { label: "FAT", value: "6g" },
+      { label: "SUGAR", value: "8g" },
+    ],
+    color: "blue",
+    servingSize: "200ml",
+    nutritionInfo: {
+      totalFat: "6g",
+      saturatedFat: "5g",
+      carbohydrates: "8g",
+      sugar: "8g",
+      protein: "12g",
+      lactoseFree: "Yes",
+    },
+  },
+  {
+    id: "standardized-milk",
+    name: "Standardized Milk",
+    description: "Balanced nutrition for overall wellness",
+    image:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/mockup-Pacdora-j8elbYLu7SmUOWRCOIbCmS5H6ZDdcr.png",
+    features: [
+      { label: "PROTEIN", value: "12g" },
+      { label: "FAT", value: "9g" },
+      { label: "SUGAR", value: "9g" },
+    ],
+    color: "orange",
+    servingSize: "200ml",
+    nutritionInfo: {
+      totalFat: "9g",
+      saturatedFat: "5g",
+      carbohydrates: "8g",
+      sugar: "9g",
+      protein: "12g",
+      lactoseFree: "No",
+    },
+  },
+];
+
+// Background gradient classes
+const getColorClasses = (color: string) => {
+  switch (color) {
+    case "blue":
+      return "from-blue-500 to-blue-700 text-white";
+    case "orange":
+      return "from-orange-500 to-orange-700 text-white";
+    default:
+      return "from-gray-500 to-gray-700 text-white";
+  }
+};
+
+// Button gradient classes (matching background color theme)
+const getButtonGradientClasses = (color: string) => {
+  switch (color) {
+    case "teal":
+      return "bg-gradient-to-r from-teal-500 to-teal-700 hover:from-teal-600 hover:to-teal-800";
+    case "yellow":
+      return "bg-gradient-to-r from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-yellow-800";
+    default:
+      return "bg-gradient-to-r from-gray-500 to-gray-700 hover:from-gray-600 hover:to-gray-800";
+  }
+};
+
+export default function WellnessSeekerPage() {
+  return (
+    <div className="min-h-screen bg-white overflow-hidden">
+      <Navbar />
+
+      <motion.section className="py-1 pt-32 bg-gradient-to-br from-blue-50 to-blue-100">
+        <div className="container mx-auto px-4">
+          <h1
+            className={`text-4xl md:text-5xl font-normal text-center text-blue-800 mb-8 ${quicksand.className}`}
+          >
+            Products for Health-Conscious Individuals
+          </h1>
+          <p className="text-xl text-center text-blue-600 mb-12 max-w-3xl mx-auto">
+            Nurture your body and mind with our wholesome products designed to
+            support your health-conscious lifestyle.
+          </p>
+        </div>
+      </motion.section>
+
+      {products.map((product, index) => (
+        <section
+          key={product.id}
+          className={`relative min-h-screen flex items-center bg-gradient-to-br ${getColorClasses(
+            product.color
+          )}`}
+        >
+          {/* Bottom wave for layering */}
+          <div className="absolute inset-x-0 bottom-0">
+            <svg
+              viewBox="0 0 1440 290"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="text-white"
+            >
+              <path
+                fill="currentColor"
+                d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              />
+            </svg>
+          </div>
+
+          <div className="container mx-auto px-4 py-24">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Image */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className={`order-2 ${
+                  index % 2 === 0 ? "lg:order-1" : "lg:order-2"
+                }`}
+              >
+                <div className="relative h-[600px] w-full scale-150 lg:scale-100">
+                  <Image
+                    src={product.image || "/placeholder.svg"}
+                    alt={product.name}
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+              </motion.div>
+
+              {/* Text and Details */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className={`text-center lg:text-left order-1 ${
+                  index % 2 === 0 ? "lg:order-2" : "lg:order-1"
+                }`}
+              >
+                {/* Headings */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <h2
+                    className={`text-2xl font-normal mb-4 text-white/90 ${quicksand.className}`}
+                  >
+                    HEALTH-CONSCIOUS
+                  </h2>
+                  <h1
+                    className={`text-4xl lg:sm:text-6xl text-5xl font-light mb-6 text-white ${quicksand.className}`}
+                  >
+                    {product.name}
+                  </h1>
+                  <p className="text-xl lg:text-2xl mb-12 text-white/80">
+                    {product.description}
+                  </p>
+                </motion.div>
+
+                {/* Features */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="grid grid-cols-3 gap-8 mb-6"
+                >
+                  {product.features.map((feature, idx) => (
+                    <div key={idx} className="text-center">
+                      <div className="text-5xl lg:sm:text-6xl text-5xl font-bold mb-2 text-white">
+                        {feature.value}
+                      </div>
+                      <div className="text-sm lg:text-base font-semibold text-white/90">
+                        {feature.label}
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+
+                {/* Nutrition Info */}
+                {product.nutritionInfo && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                    className="mb-12 bg-white/20 backdrop-blur-sm p-6 rounded-xl"
+                  >
+                    <h3 className="text-2xl font-bold text-white">
+                      Nutrition Information
+                    </h3>
+                    <p className="text-lg text-white/90 mb-4">
+                      Per {product.servingSize} serving:
+                    </p>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {Object.entries(product.nutritionInfo).map(
+                        ([key, value]) => (
+                          <div key={key} className="text-center">
+                            <div className="text-3xl font-bold text-white">
+                              {value}
+                            </div>
+                            <div className="text-sm font-semibold text-white/90">
+                              {key
+                                .replace(/([A-Z])/g, " $1")
+                                .trim()
+                                .toUpperCase()}
+                            </div>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Single "Learn More" Button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                  className="relative z-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                >
+                  <Link href={`/products/${product.id}`} passHref>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white text-lg px-10 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-teal-300"
+                      aria-label={`Learn more about ${product.name}`}
+                    >
+                      Learn More
+                    </motion.button>
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <Footer />
+    </div>
+  );
+}

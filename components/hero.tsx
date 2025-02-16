@@ -58,7 +58,7 @@ export function Hero() {
               <p
                 className={`text-lg sm:text-xl font-bold text-unblend-navy pb-2 sm:pb-5 rounded-lg inline-block ${quicksand.className}`}
               >
-                Experience the perfect blend of health, taste, and convenience.
+                Experience the fresh blend of health, taste, and convenience.
               </p>
             </motion.div>
 

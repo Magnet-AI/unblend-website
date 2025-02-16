@@ -14,7 +14,7 @@ const colorClasses = {
 export function Comparisons({ color, protein }) {
   return (
     <div>
-      <section className="py-32 px-4 sm:px-6 lg:px-8">
+      <section className="py-24 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

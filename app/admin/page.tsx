@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -6,7 +6,13 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function AdminPage() {
@@ -26,13 +32,15 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-joyya-blue/20 via-white to-joyya-blue/20">
+    <div className="min-h-screen bg-gradient-to-br from-unblend-blue/20 via-white to-unblend-blue/20">
       <Navbar />
       <main className="container mx-auto px-4 py-24">
         <Card className="max-w-md mx-auto">
           <CardHeader>
             <CardTitle>Admin Login</CardTitle>
-            <CardDescription>Enter your credentials to access the admin panel</CardDescription>
+            <CardDescription>
+              Enter your credentials to access the admin panel
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">
@@ -57,7 +65,10 @@ export default function AdminPage() {
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
-              <Button type="submit" className="w-full bg-gray-800 text-white hover:bg-gray-900">
+              <Button
+                type="submit"
+                className="w-full bg-gray-800 text-white hover:bg-gray-900"
+              >
                 Login
               </Button>
             </form>

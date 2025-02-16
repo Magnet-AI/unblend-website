@@ -7,12 +7,31 @@ import { Menu } from "lucide-react";
 import { useCart } from "@/context/cart-context";
 import { Quicksand } from "next/font/google";
 import { motion, AnimatePresence } from "framer-motion";
-import type React from "react"; // Added import for React
+import type React from "react";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
   variable: "--font-quicksand",
 });
+
+const productCategories = [
+  {
+    name: "Milk",
+    items: ["Standardized Milk", "Full Cream Milk", "Toned Milk"],
+  },
+  {
+    name: "Protein Shakes",
+    items: ["Chocolate Protein Milkshake"],
+  },
+];
+
+const lifestyleCategories = [
+  { name: "Fitness Enthusiast", href: "/our-products/fitness-enthusiast" },
+  { name: "Coffee & Tea Lover", href: "/our-products/coffee-tea-lover" },
+  { name: "Professional Athlete", href: "/our-products/active-lifestyle" },
+  { name: "Health-Conscious", href: "/our-products/health-conscious" },
+  { name: "Family & Homemaker", href: "/our-products/family-homemaker" },
+];
 
 const NavLink = ({
   href,
@@ -29,7 +48,7 @@ const NavLink = ({
     onClick={onClick}
   >
     {children}
-    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-unblend-blue transition-all duration-300 ease-in-out group-hover:w-full"></span>
+    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-unblend-blue transition-all duration-300 ease-in-out group-hover:w-full" />
   </Link>
 );
 
@@ -37,6 +56,9 @@ export function Navbar() {
   const { state } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
+
   const itemCount = state.items.reduce(
     (total, item) => total + item.quantity,
     0
@@ -54,7 +76,6 @@ export function Navbar() {
     <nav className="fixed w-full z-50 transition-all duration-300 ease-in-out bg-white/80 backdrop-blur-md shadow-md">
       <div className="relative container mx-auto px-4 max-w-7xl">
         <div className="flex items-center justify-between h-20 relative">
-          {/* Mobile Menu Button - Always Visible and Fixed to the Left */}
           <div className="absolute left-4 lg:hidden">
             <Button
               className="text-unblend-navy hover:text-unblend-blue"
@@ -66,7 +87,6 @@ export function Navbar() {
             </Button>
           </div>
 
-          {/* Centered Logo - Always Fixed in the Middle */}
           <div className="absolute left-1/2 transform -translate-x-1/2">
             <Link href="/" className="flex items-center">
               <img
@@ -77,23 +97,96 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation - Left Side */}
           <div
             className={`hidden lg:flex items-center space-x-8 ${quicksand.variable} font-quicksand`}
           >
-            <NavLink href="/products">OUR PRODUCTS</NavLink>
+            <div
+              className="relative"
+              onMouseEnter={() => setIsProductsOpen(true)}
+              onMouseLeave={() => setIsProductsOpen(false)}
+            >
+              <button
+                onClick={() => setIsProductsOpen(!isProductsOpen)}
+                className="relative text-unblend-navy hover:text-unblend-blue font-medium transition-colors duration-300 ease-in-out group inline-flex items-center"
+              >
+                OUR PRODUCTS
+              </button>
+              <AnimatePresence>
+                {isProductsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute left-0 mt-2 w-screen max-w-screen-xl bg-white shadow-lg rounded-b-xl overflow-hidden z-50"
+                  >
+                    <div className="grid grid-cols-4 gap-8 p-8">
+                      <div className="col-span-3 grid grid-cols-3 gap-8">
+                        {productCategories.map((category) => (
+                          <div key={category.name}>
+                            <h3 className="font-bold text-lg mb-2 text-unblend-navy">
+                              {category.name}
+                            </h3>
+                            <ul className="space-y-2">
+                              {category.items.map((item) => (
+                                <li key={item}>
+                                  <Link
+                                    href={`/products/${item
+                                      .toLowerCase()
+                                      .replace(/\s+/g, "-")}`}
+                                    className="text-gray-600 hover:text-unblend-blue"
+                                  >
+                                    {item}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-lg mb-2 text-unblend-navy">
+                          Shop by Lifestyle
+                        </h3>
+                        <ul className="space-y-2">
+                          {lifestyleCategories.map((category) => (
+                            <li key={category.name}>
+                              <Link
+                                href={category.href}
+                                className="text-gray-600 hover:text-unblend-blue"
+                              >
+                                {category.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="bg-gray-100 p-4 text-center">
+                      <Link
+                        href="/products"
+                        className="text-unblend-navy hover:text-unblend-blue font-medium"
+                      >
+                        View All Products
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             <NavLink href="/how-we-do-it">HOW WE DO IT</NavLink>
             <NavLink href="/faq">FAQ</NavLink>
             <NavLink href="/recipes">RECIPES</NavLink>
           </div>
 
-          {/* Desktop Navigation - Right Side */}
           <div
             className={`hidden lg:flex items-center space-x-8 ${quicksand.variable} font-quicksand`}
           >
             <NavLink href="/about">ABOUT US</NavLink>
             <NavLink href="/find-unblend">FIND UNBLEND</NavLink>
             <NavLink href="/quiz">TAKE THE QUIZ</NavLink>
+
             <Link href="/cart">
               <Button
                 variant="ghost"
@@ -116,7 +209,6 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div

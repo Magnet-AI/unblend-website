@@ -49,12 +49,12 @@ const modernBenefits = [
     description:
       "Made with pure, high-quality milk and no artificial additives, preserving the authenticity of traditional dairy while meeting modern nutritional needs.",
     icon: Leaf,
-    stats: "100% natural ingredients",
+    stats: "100% natural milk",
   },
   {
     title: "Ideal for Busy Lives",
     description:
-      "Quick nutrition for your busy lifestyle - perfect in tea, coffee, or straight from the glass. Just the ready-to-drinkproduct you need when you are late.",
+      "Quick nutrition for your busy lifestyle - perfect in tea, coffee, or straight from the glass. Just the ready-to-drink product you need when you are late.",
     icon: Clock,
     stats: "Convenient nutrition on-the-go",
   },
