@@ -1,69 +1,77 @@
-# UnBlend Website
+# 🥛 UnBlend Website
 
-UnBlend is a modern website for an innovative dairy company specializing in ultra-filtered milk products. This project is built using Next.js, React, and various other modern web technologies.
+**Live:** [unbend.in](https://unbend.in)
 
-## Features
+**UnBlend** is a modern, responsive website for an innovative dairy brand specializing in **ultra-filtered milk products**. Built with **Next.js**, **React**, and a modern frontend stack, it delivers a smooth, interactive user experience that highlights UnBlend’s commitment to nutrition and transparency.
 
-- Responsive design for various screen sizes
-- Interactive product showcase
-- Personalized product recommendation quiz
-- Detailed product pages
-- Recipe section with individual recipe pages
-- About Us and Our Story pages
-- Contact form
-- FAQ section
+---
 
-## Technologies Used
+## 🚀 Features
 
-- Next.js 13+ (App Router)
-- React 18+
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- Lucide React Icons
-- Shadcn UI Components
+* Responsive and mobile-friendly design
+* Interactive product showcase and flavor pages
+* Personalized product recommendation quiz
+* Recipe section with detailed nutrition info
+* About Us and Our Story pages
+* Contact form and FAQ section
 
-## Getting Started
+---
+
+## 🧰 Technologies Used
+
+* **Framework:** Next.js 13+ (App Router)
+* **Library:** React 18+
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS, Framer Motion
+* **UI Components:** Shadcn UI, Lucide Icons
+
+---
+
+## ⚙️ Getting Started
 
 ### Prerequisites
 
-- Node.js 14.6.0 or newer
-- npm or yarn
+* Node.js 14.6.0 or newer
+* npm or yarn
 
 ### Installation
 
-1. Clone the repository:
-```git clone https://github.com/your-username/unblend-website.git```
+```bash
+git clone https://github.com/your-username/unblend-website.git
+cd unblend-website
+npm install   # or yarn install
+npm run dev   # or yarn dev
+```
 
-2. Navigate to the project directory:
-```cd unblend-website```
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-3. Install dependencies:
-```npm install```
-or
-```yarn install```
+---
 
-4. Run the development server:
-```npm run dev```
-or
-```yarn dev```
+## 🗂️ Project Structure
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+```
+app/           # Main pages and layouts
+components/    # Reusable UI components
+public/        # Images and static assets
+styles/        # Tailwind & global CSS
+lib/           # Utilities and helpers
+```
 
-## Project Structure
+---
 
-- `app/`: Contains the main application pages and layouts
-- `components/`: Reusable React components
-- `public/`: Static assets like images
-- `styles/`: Global styles and Tailwind CSS configuration
-- `lib/`: Utility functions and helpers
+## 🧩 Customization
 
-## Customization
+* Update `tailwind.config.js` for colors, fonts, and theme
+* Modify `app/layout.tsx` for global layout and SEO
+* Add or update pages in `app/`
+* Create or adjust components in `components/`
 
-- Update `tailwind.config.js` to modify the theme, colors, and fonts
-- Modify `app/layout.tsx` to change the global layout and metadata
-- Add or update pages in the `app/` directory
-- Create or modify components in the `components/` directory
+---
 
+## 👥 Author
 
-This README provides a comprehensive overview of the UnBlend website project, including its features, technologies used, setup instructions, and project structure. It should help developers quickly understand and get started with the project.
+**Manush Murali** — Founder & Developer, UnBlend
+
+---
+
+© 2025 UnBlend. All rights reserved.
