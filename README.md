@@ -1,7 +1,5 @@
 # 🥛 UnBlend Website
 
-**Live:** [unbend.in](https://unbend.in)
-
 **UnBlend** is a modern, responsive website for an innovative dairy brand specializing in **ultra-filtered milk products**. Built with **Next.js**, **React**, and a modern frontend stack, it delivers a smooth, interactive user experience that highlights UnBlend’s commitment to nutrition and transparency.
 
 ---
